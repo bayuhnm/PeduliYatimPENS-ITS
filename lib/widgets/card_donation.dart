@@ -17,7 +17,7 @@ class DonationCard extends StatelessWidget {
         },
       child: Container(
         margin: const EdgeInsets.only(left: 15, bottom: 20),
-        height: 200,
+        height: 210,
         width: 200,
         decoration: BoxDecoration(
           color: whiteColor,
@@ -60,14 +60,14 @@ class DonationCard extends StatelessWidget {
                     Text(
                       'Beasiswa prestasi untuk anak-anak penghafal Al-Quran',
                       style: darkTextStyle.copyWith(
-                          fontSize: 13, fontWeight: semiBold),
+                          fontSize: 12, fontWeight: semiBold),
                     ),
                     const SizedBox(
-                      height: 8.0,
+                      height: 15,
                     ),
-                    PercentageBar(percentage: 74, width: 184),
+                    PercentageBar(percentage: 34, width: 184),
                     const SizedBox(
-                      height: 8.0,
+                      height: 10,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,

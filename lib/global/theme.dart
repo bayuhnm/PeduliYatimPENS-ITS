@@ -19,6 +19,7 @@ const MaterialColor myColor = MaterialColor(
 Color whiteColor = const Color(0xffFFFFFF);
 Color blackColor = const Color(0xff141414);
 Color darkColor = const Color(0xff1F2D36);
+Color semidarkColor = const Color(0xff7d7d7d);
 Color greyColor = const Color(0xffA3A3A3);
 Color redColor = const Color(0xffB60000);
 Color blueColor = const Color(0xff005F9B);
@@ -51,6 +52,11 @@ TextStyle greyTextStyle = TextStyle(
 TextStyle darkTextStyle = TextStyle(
   fontFamily: 'Open Sans',
   color: darkColor
+);
+
+TextStyle semidarkTextStyle = TextStyle(
+  fontFamily: 'Open Sans',
+  color: semidarkColor
 );
 
 TextStyle greenTextStyle = TextStyle(

@@ -11,18 +11,19 @@ class PercentageBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: width,
-      height: 5,
+      height: 4,
       decoration: BoxDecoration(
-        color: Colors.grey[300],
+        // color: Colors.grey[300],
+        color: backgroundLightGreenColor,
         borderRadius: BorderRadius.circular(5),
       ),
       child: Stack(
         children: <Widget>[
           Container(
             width: percentage * width / 100,
-            height: 5,
+            height: 4,
             decoration: BoxDecoration(
-              color: darkColor,
+              color: greenPrimaryColor,
               borderRadius: BorderRadius.circular(5),
             ),
           ),

@@ -69,7 +69,7 @@ class _HomePageState extends State<HomePage> {
                   width: 20,
                   color: greyColor,
                 ),
-                label: 'Laporan',
+                label: 'Riwayat',
               ),
               BottomNavigationBarItem(
                 icon: Image.asset(
@@ -83,270 +83,268 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         backgroundColor: backgroundGreyColor,
-        body: SafeArea(
-          child: CustomScrollView(
-            slivers: [
-              SliverAppBar(
+        body: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              toolbarHeight: 50,
+              floating: true,
+              pinned: true,
+              snap: false,
+              centerTitle: false,
+              title: Text(
+                'Peduli Yatim PENS-ITS',
+                style: whiteTextStyle.copyWith(fontSize: 18,),
+              ),
+              backgroundColor: backgroundDarkGreenColor,
+              actions: [
+                IconButton(
+                  onPressed: () {},
+                  icon: const Icon(Icons.notifications),
+                )
+              ],
+              bottom: AppBar(
                 toolbarHeight: 50,
-                floating: true,
-                pinned: true,
-                snap: false,
-                centerTitle: false,
-                title: Text(
-                  'Peduli Yatim PENS-ITS',
-                  style: whiteTextStyle.copyWith(fontSize: 18,),
-                ),
+                elevation: 0,
                 backgroundColor: backgroundDarkGreenColor,
-                actions: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.notifications),
-                  )
-                ],
-                bottom: AppBar(
-                  toolbarHeight: 50,
-                  elevation: 0,
-                  backgroundColor: backgroundDarkGreenColor,
-                  title: Container(
-                    width: double.infinity,
-                    height: 36,
-                    decoration: BoxDecoration(
-                      color: whiteColor,
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Cari donasi',
-                        hintStyle:
-                            TextStyle(fontFamily: 'opensans', fontSize: 14),
-                        prefixIcon: Icon(Icons.search),
-                        border: InputBorder.none,
-                      ),
+                title: Container(
+                  width: double.infinity,
+                  height: 36,
+                  decoration: BoxDecoration(
+                    color: whiteColor,
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: TextField(
+                    decoration: InputDecoration(
+                      hintText: 'Cari donasi',
+                      hintStyle:
+                          TextStyle(fontFamily: 'opensans', fontSize: 14),
+                      prefixIcon: Icon(Icons.search),
+                      border: InputBorder.none,
                     ),
                   ),
                 ),
               ),
-              SliverList(
-                delegate: SliverChildListDelegate(
-                  [
-                    Container(
-                      height: 95,
-                      decoration: BoxDecoration(color: whiteColor),
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                            left: 15, right: 15, top: 20, bottom: 15),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            HomeDonationCategory(
-                              iconUrl: 'asset/icon/Calendar.png',
-                              label: 'Donasi Rutin',
-                              onTap: () {},
-                            ),
-                            HomeDonationCategory(
-                              iconUrl: 'asset/icon/InfaqYatim.png',
-                              label: 'Infaq Yatim',
-                              onTap: () {},
-                            ),
-                            HomeDonationCategory(
-                              iconUrl: 'asset/icon/Zakat.png',
-                              label: 'Zakat',
-                              onTap: () {},
-                            ),
-                            HomeDonationCategory(
-                              iconUrl: 'asset/icon/Category.png',
-                              label: 'Lainnya',
-                              onTap: () {},
-                            ),
-                          ],
+            ),
+            SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  Container(
+                    height: 95,
+                    decoration: BoxDecoration(color: whiteColor),
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                          left: 15, right: 15, top: 20, bottom: 15),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          HomeDonationCategory(
+                            iconUrl: 'asset/icon/Calendar.png',
+                            label: 'Donasi Rutin',
+                            onTap: () {},
+                          ),
+                          HomeDonationCategory(
+                            iconUrl: 'asset/icon/InfaqYatim.png',
+                            label: 'Infaq Yatim',
+                            onTap: () {},
+                          ),
+                          HomeDonationCategory(
+                            iconUrl: 'asset/icon/Zakat.png',
+                            label: 'Zakat',
+                            onTap: () {},
+                          ),
+                          HomeDonationCategory(
+                            iconUrl: 'asset/icon/Category.png',
+                            label: 'Lainnya',
+                            onTap: () {},
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  
+                  Container(
+                    height: 275,
+                    margin: const EdgeInsets.only(
+                      top: 10,
+                    ),
+                    decoration: BoxDecoration(
+                      color: whiteColor,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(
+                          height: 10,
                         ),
-                      ),
-                    ),
-                    
-                    Container(
-                      height: 265,
-                      margin: const EdgeInsets.only(
-                        top: 10,
-                      ),
-                      decoration: BoxDecoration(
-                        color: whiteColor,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(
-                            height: 10,
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 15,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 15,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Donasi Terbaru',
-                                  style: darkTextStyle.copyWith(
-                                    fontSize: 16,
-                                    fontWeight: semiBold,
-                                  ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Donasi Terbaru',
+                                style: darkTextStyle.copyWith(
+                                  fontSize: 16,
+                                  fontWeight: semiBold,
                                 ),
-                                Text(
-                                  'Lihat Lainnya',
-                                  style: greenTextStyle.copyWith(
-                                    fontSize: 12,
-                                     fontWeight: medium,
-                                  ),
+                              ),
+                              Text(
+                                'Lihat Lainnya',
+                                style: greenTextStyle.copyWith(
+                                  fontSize: 12,
+                                   fontWeight: medium,
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                          const SizedBox(
-                            height: 15,
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: [
+                              DonationCard(),
+                              DonationCard(),
+                              DonationCard(),
+                              DonationCard(),
+                            ],
                           ),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: [
-                                DonationCard(),
-                                DonationCard(),
-                                DonationCard(),
-                                DonationCard(),
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
+                        )
+                      ],
                     ),
-                    Container(
-                      height: 254,
-                      margin: const EdgeInsets.only(
-                        top: 10,
-                      ),
-                      decoration: BoxDecoration(
-                        color: whiteColor,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(
-                            height: 10,
+                  ),
+                  Container(
+                    height: 254,
+                    margin: const EdgeInsets.only(
+                      top: 10,
+                    ),
+                    decoration: BoxDecoration(
+                      color: whiteColor,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 15,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 15,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  'Laporan Kegiatan',
-                                  style: darkTextStyle.copyWith(
-                                    fontSize: 16,
-                                    fontWeight: semiBold,
-                                  ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Laporan Kegiatan',
+                                style: darkTextStyle.copyWith(
+                                  fontSize: 16,
+                                  fontWeight: semiBold,
                                 ),
-                                Text(
-                                  'Lihat Lainnya',
-                                  style: greenTextStyle.copyWith(
-                                    fontSize: 12,
-                                    fontWeight: medium,
-                                  ),
+                              ),
+                              Text(
+                                'Lihat Lainnya',
+                                style: greenTextStyle.copyWith(
+                                  fontSize: 12,
+                                  fontWeight: medium,
                                 ),
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                          const SizedBox(
-                            height: 15,
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: [
+                              ActivityReportCard(),
+                              ActivityReportCard(),
+                              ActivityReportCard(),
+                              ActivityReportCard(),
+                            ],
                           ),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: [
-                                ActivityReportCard(),
-                                ActivityReportCard(),
-                                ActivityReportCard(),
-                                ActivityReportCard(),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                    Container(
-                      child: Image.asset('asset/image/banner1.jpg'),
+                  ),
+                  Container(
+                    child: Image.asset('asset/image/banner1.jpg'),
+                  ),
+                  Container(
+                    height: 300,
+                    margin: const EdgeInsets.only(
+                      bottom: 0
                     ),
-                    Container(
-                      height: 300,
-                      margin: const EdgeInsets.only(
-                        bottom: 0
-                      ),
-                      decoration: BoxDecoration(
-                        color: whiteColor,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(
-                            height: 10,
+                    decoration: BoxDecoration(
+                      color: whiteColor,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 15,
                           ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 15,
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Artikel Terbaru',
-                                      style: darkTextStyle.copyWith(
-                                        fontSize: 16,
-                                        fontWeight: semiBold,
-                                      ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Artikel Terbaru',
+                                    style: darkTextStyle.copyWith(
+                                      fontSize: 16,
+                                      fontWeight: semiBold,
                                     ),
-                                    SizedBox(height: 2,),
-                                    Text(
-                                      'Update artikel terbaru seputar islam',
-                                      style: greyTextStyle.copyWith(
-                                        fontSize: 12,
-                                        fontWeight: regular,
-                                      ),
+                                  ),
+                                  SizedBox(height: 2,),
+                                  Text(
+                                    'Update artikel terbaru seputar islam',
+                                    style: greyTextStyle.copyWith(
+                                      fontSize: 12,
+                                      fontWeight: regular,
                                     ),
-                                  ],
-                                ),
-                                // Text(
-                                //   'Lihat Lainnya',
-                                //   style: greenTextStyle.copyWith(
-                                //     fontSize: 12,
-                                //   ),
-                                // ),
-                              ],
-                            ),
+                                  ),
+                                ],
+                              ),
+                              // Text(
+                              //   'Lihat Lainnya',
+                              //   style: greenTextStyle.copyWith(
+                              //     fontSize: 12,
+                              //   ),
+                              // ),
+                            ],
                           ),
-                          const SizedBox(
-                            height: 15,
+                        ),
+                        const SizedBox(
+                          height: 15,
+                        ),
+                        SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: [
+                              ArticleCard(),
+                              ArticleCard(),
+                              ArticleCard(),
+                            ],
                           ),
-                          SingleChildScrollView(
-                            scrollDirection: Axis.horizontal,
-                            child: Row(
-                              children: [
-                                ArticleCard(),
-                                ArticleCard(),
-                                ArticleCard(),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

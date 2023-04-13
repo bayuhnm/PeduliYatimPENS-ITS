@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.peduli_yatim_pens_mobile">
    <application
-        android:label="peduli_yatim_pens_mobile"
+        android:label="Peduli Yatim"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity
