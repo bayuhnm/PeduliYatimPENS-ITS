@@ -78,6 +78,7 @@ class _HomePageState extends State<HomePage> {
                   color: greyColor,
                 ),
                 label: 'Akun',
+                
               ),
             ],
           ),
@@ -93,7 +94,9 @@ class _HomePageState extends State<HomePage> {
               centerTitle: false,
               title: Text(
                 'Peduli Yatim PENS-ITS',
-                style: whiteTextStyle.copyWith(fontSize: 18,),
+                style: whiteTextStyle.copyWith(
+                  fontSize: 18,
+                ),
               ),
               backgroundColor: backgroundDarkGreenColor,
               actions: [
@@ -119,6 +122,7 @@ class _HomePageState extends State<HomePage> {
                       hintStyle:
                           TextStyle(fontFamily: 'opensans', fontSize: 14),
                       prefixIcon: Icon(Icons.search),
+
                       border: InputBorder.none,
                     ),
                   ),
@@ -155,13 +159,17 @@ class _HomePageState extends State<HomePage> {
                           HomeDonationCategory(
                             iconUrl: 'asset/icon/Category.png',
                             label: 'Lainnya',
-                            onTap: () {},
+                            onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) => const MoreDialog(),
+                              );
+                            },
                           ),
                         ],
                       ),
                     ),
                   ),
-                  
                   Container(
                     height: 275,
                     margin: const EdgeInsets.only(
@@ -194,7 +202,7 @@ class _HomePageState extends State<HomePage> {
                                 'Lihat Lainnya',
                                 style: greenTextStyle.copyWith(
                                   fontSize: 12,
-                                   fontWeight: medium,
+                                  fontWeight: medium,
                                 ),
                               ),
                             ],
@@ -207,10 +215,37 @@ class _HomePageState extends State<HomePage> {
                           scrollDirection: Axis.horizontal,
                           child: Row(
                             children: [
-                              DonationCard(),
-                              DonationCard(),
-                              DonationCard(),
-                              DonationCard(),
+                              DonationCard(
+                                imageUrl: 'asset/image/imageA2.jpg',
+                                donationTitle:
+                                    'Bantu Pembangunan Masjid Jami Al-Mukminin',
+                                money: '67.000.000',
+                                day: '39',
+                                percentage: 26,
+                              ),
+                              DonationCard(
+                                imageUrl: 'asset/image/imageA5.jpg',
+                                donationTitle:
+                                    'Bantu Pembelian Fasilitas Belajar Yayasan At-Thoha',
+                                money: '7.820.000',
+                                day: '17',
+                                percentage: 68,
+                              ),
+                              DonationCard(
+                                imageUrl: 'asset/image/imageA1.jpg',
+                                donationTitle: 'Bantuan Donasi 500 Al-Quran',
+                                money: '20.300.000',
+                                day: '27',
+                                percentage: 37,
+                              ),
+                              DonationCard(
+                                imageUrl: 'asset/image/imageA6.jpg',
+                                donationTitle:
+                                    'Bantuan Sembako Untuk Fakir Miskin Sekitar PENS',
+                                money: '23.000.000',
+                                day: '3',
+                                percentage: 89,
+                              ),
                             ],
                           ),
                         )
@@ -261,11 +296,25 @@ class _HomePageState extends State<HomePage> {
                         SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Row(
+                            
                             children: [
-                              ActivityReportCard(),
-                              ActivityReportCard(),
-                              ActivityReportCard(),
-                              ActivityReportCard(),
+                              ActivityReportCard(
+                                imageUrl: 'asset/image/imageB2.jpeg',
+                                reportTitle: 'Penyaluran Zakat',
+                              ),
+                              ActivityReportCard(
+                                imageUrl: 'asset/image/imageB1.jpeg',
+                                reportTitle: 'Bantuan Modal Usaha Bu Sumiyati',
+                              ),
+                              ActivityReportCard(
+                                imageUrl: 'asset/image/imageB3.jpeg',
+                                reportTitle:
+                                    'Penyaluran Dana Bantuan Yayasan Terpadu',
+                              ),
+                              ActivityReportCard(
+                                imageUrl: 'asset/image/imageB4.jpeg',
+                                reportTitle: 'Bantuan Modal Usaha Bu Lely',
+                              ),
                             ],
                           ),
                         ),
@@ -277,9 +326,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Container(
                     height: 300,
-                    margin: const EdgeInsets.only(
-                      bottom: 0
-                    ),
+                    margin: const EdgeInsets.only(bottom: 0),
                     decoration: BoxDecoration(
                       color: whiteColor,
                     ),
@@ -306,7 +353,9 @@ class _HomePageState extends State<HomePage> {
                                       fontWeight: semiBold,
                                     ),
                                   ),
-                                  SizedBox(height: 2,),
+                                  SizedBox(
+                                    height: 2,
+                                  ),
                                   Text(
                                     'Update artikel terbaru seputar islam',
                                     style: greyTextStyle.copyWith(

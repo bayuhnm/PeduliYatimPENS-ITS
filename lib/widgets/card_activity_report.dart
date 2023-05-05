@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:peduli_yatim_pens_mobile/global/theme.dart';
+import 'package:peduli_yatim_pens_mobile/pages/detail_activity_report.page%20copy.dart';
 
 class ActivityReportCard extends StatelessWidget {
-  const ActivityReportCard({super.key});
+  final String imageUrl;
+  final String reportTitle;
+  
+  const ActivityReportCard({
+    Key? key,
+    required this.imageUrl,
+    required this.reportTitle,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +37,12 @@ class ActivityReportCard extends StatelessWidget {
         ],
       ),
       child: GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => DetailActivityPage()),
+          );
+        },
         child: ClipRRect(
           borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(10),
@@ -39,7 +53,7 @@ class ActivityReportCard extends StatelessWidget {
               AspectRatio(
                 aspectRatio: 16 / 9,
                 child: Image.asset(
-                  'asset/image/imageA3.jpg',
+                  imageUrl,
                   fit: BoxFit.fitWidth,
                 ),
               ),
@@ -71,16 +85,19 @@ class ActivityReportCard extends StatelessWidget {
                     const SizedBox(
                       height: 8.0,
                     ),
-                    Text(
-                      'Bantuan 200 Al-Quran di bulan Ramadhan',
-                      style: darkTextStyle.copyWith(
-                          fontSize: 12, fontWeight: semiBold),
+                    SizedBox(
+                      height: 30,
+                      child: Text(
+                        reportTitle,
+                        style: darkTextStyle.copyWith(
+                            fontSize: 12, fontWeight: semiBold),
+                      ),
                     ),
                     const SizedBox(
                       height: 8.0,
                     ),
                     Text(
-                      'Bantuan 200 Al-Quran diberikan kepada panti asuhan manyar',
+                      'Alhamdulillah bantuan sudah disalurkan kepada yang',
                       style: greyTextStyle.copyWith(
                           fontSize: 10, fontWeight: medium),
                     ),

@@ -1,10 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:peduli_yatim_pens_mobile/global/theme.dart';
 import 'package:peduli_yatim_pens_mobile/pages/detail_donation_program.page.dart';
 import 'percentage_bar.dart';
 
 class DonationCard extends StatelessWidget {
-  const DonationCard({super.key});
+  final String imageUrl;
+  final String donationTitle;
+  final double percentage;
+  final String money;
+  final String day;
+
+  const DonationCard({
+    Key? key,
+    required this.imageUrl,
+    required this.donationTitle,
+    required this.percentage,
+    required this.money,
+    required this.day,
+    }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -49,23 +63,27 @@ class DonationCard extends StatelessWidget {
               AspectRatio(
                 aspectRatio: 16 / 9,
                 child: Image.asset(
-                  'asset/image/imageA1.jpg',
+                  imageUrl,
                   fit: BoxFit.fitWidth,
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      'Beasiswa prestasi untuk anak-anak penghafal Al-Quran',
-                      style: darkTextStyle.copyWith(
-                          fontSize: 12, fontWeight: semiBold),
+                    SizedBox(
+                      height: 30,
+                      child: Text(
+                        donationTitle,
+                        style: darkTextStyle.copyWith(
+                            fontSize: 12, fontWeight: semiBold),
+                      ),
                     ),
                     const SizedBox(
                       height: 15,
                     ),
-                    PercentageBar(percentage: 34, width: 184),
+                    PercentageBar(percentage: percentage, width: 184),
                     const SizedBox(
                       height: 10,
                     ),
@@ -86,7 +104,7 @@ class DonationCard extends StatelessWidget {
                             ),
                             child: Center(
                               child: Text(
-                                'Rp. 1.500.000,-',
+                                'Rp. $money,-',
                                 style: greenTextStyle.copyWith(
                                   fontSize: 12,
                                   fontWeight: bold,
@@ -96,7 +114,7 @@ class DonationCard extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '30 Hari lagi',
+                          '$day Hari lagi',
                           style: darkTextStyle.copyWith(
                             fontSize: 11,
                             fontWeight: medium,

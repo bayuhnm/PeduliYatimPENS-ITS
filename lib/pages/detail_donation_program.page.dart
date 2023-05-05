@@ -80,7 +80,7 @@ class DetailDonationPage extends StatelessWidget {
                       child: AspectRatio(
                         aspectRatio: 16 / 9,
                         child: Image.asset(
-                          'asset/image/imageA3.jpg',
+                          'asset/image/imageA2.jpg',
                           fit: BoxFit.fitWidth,
                         ),
                       ),
@@ -94,7 +94,7 @@ class DetailDonationPage extends StatelessWidget {
                         children: [
                           SizedBox(height: 10),
                           Text(
-                            'Beasiswa prestasi untuk anak-anak penghafal Al-Quran',
+                            'Bantu Pembangunan Masjid Jami Al-Mukminin',
                             style: darkTextStyle.copyWith(
                               height: 1.2,
                               fontSize: 18,
@@ -113,7 +113,7 @@ class DetailDonationPage extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                '30%',
+                                '39%',
                                 style: greenTextStyle.copyWith(
                                     fontSize: 14, fontWeight: bold),
                               ),
@@ -132,7 +132,7 @@ class DetailDonationPage extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
-                                'Rp. 1.500.000',
+                                'Rp. 67.000.000',
                                 style: greenTextStyle.copyWith(
                                   fontSize: 18,
                                   fontWeight: bold,
@@ -146,7 +146,7 @@ class DetailDonationPage extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                '45.000.000',
+                                '400.000.000',
                                 style: greyTextStyle.copyWith(
                                   fontSize: 14,
                                   fontWeight: medium,
@@ -163,7 +163,7 @@ class DetailDonationPage extends StatelessWidget {
                                 fontSize: 12, fontWeight: medium),
                           ),
                           Text(
-                            '30 Hari Lagi',
+                            '39 Hari Lagi',
                             style: darkTextStyle.copyWith(
                               fontSize: 14,
                               fontWeight: semiBold,

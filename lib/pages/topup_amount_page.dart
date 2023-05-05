@@ -21,7 +21,6 @@ class _TopupAmountPageState extends State<TopupAmountPage> {
   @override
   void initState() {
     super.initState();
-
     // amountController.addListener(() {
     //   final text = amountController.text;
 
@@ -85,6 +84,7 @@ class _TopupAmountPageState extends State<TopupAmountPage> {
             height: 67,
           ),
           Align(
+            alignment: Alignment.center,
             child: SizedBox(
               width: 200,
               child: TextFormField(
