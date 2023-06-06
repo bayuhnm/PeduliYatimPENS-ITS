@@ -27,6 +27,7 @@ class CustomFormField extends StatelessWidget {
             title,
             style: blackTextStyle.copyWith(
               fontWeight: medium,
+              fontSize: 12
             ),
           ),
         if (isShowTitle)
@@ -39,7 +40,7 @@ class CustomFormField extends StatelessWidget {
           decoration: InputDecoration(
             hintText: !isShowTitle ? title : null,
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(14),
+              borderRadius: BorderRadius.circular(7),
             ),
             contentPadding: const EdgeInsets.all(12),
           ),

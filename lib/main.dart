@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:peduli_yatim_pens_mobile/pages/home_page.dart';
+import 'package:peduli_yatim_pens_mobile/pages/register_page.dart';
 import 'package:peduli_yatim_pens_mobile/pages/splash_page.dart';
+import 'package:peduli_yatim_pens_mobile/pages/login_page.dart';
 
-void main() async{
+void main() async {
+
   runApp(const MyApp());
 }
 
@@ -11,9 +14,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: SplashPage(),
+      routes: {
+          '/': (context) => const SplashPage(),
+          '/home' : (context) => const HomePage(),
+          '/login' : (context) => const LoginPage(),
+          '/register' :(context) => const RegisterPage(), 
+
+      },
     );
   }
 }

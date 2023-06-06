@@ -2,92 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:peduli_yatim_pens_mobile/global/theme.dart';
 import 'package:peduli_yatim_pens_mobile/widgets/profile_item.dart';
 
-class MyWidget extends StatefulWidget {
-  MyWidget({super.key});
-
-  int _selectedIndex = 0;
+class ProfilePage extends StatefulWidget {
+  ProfilePage({super.key});
 
   @override
-  State<MyWidget> createState() => _MyWidgetState();
-
-  // void _onItemTapped(int index) {
-  //   setState(() {
-  //     _selectedIndex = index;
-  //   });
-
-  //   // Navigate to the page associated with the tapped item
-  //   Navigator.push(
-  //     context,
-  //     MaterialPageRoute(
-  //       builder: (BuildContext context) => _widgetOptions.elementAt(index),
-  //     ),
-  //   );
-  // }
-
+  State<ProfilePage> createState() => ProfilePageState();
 }
 
-class _MyWidgetState extends State<MyWidget> {
+class ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomAppBar(
-          color: whiteColor,
-          shape: const CircularNotchedRectangle(),
-          clipBehavior: Clip.antiAlias,
-          notchMargin: 6,
-          elevation: 3,
-          child: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            backgroundColor: whiteColor,
-            elevation: 0,
-            selectedItemColor: greenPrimaryColor,
-            unselectedItemColor: blackColor,
-            showSelectedLabels: true,
-            showUnselectedLabels: true,
-            selectedLabelStyle: greenTextStyle.copyWith(
-              fontSize: 10,
-              fontWeight: medium,
-            ),
-            unselectedLabelStyle: blackTextStyle.copyWith(
-              fontSize: 10,
-              fontWeight: medium,
-            ),
-            items: [
-              BottomNavigationBarItem(
-                icon: Image.asset(
-                  'asset/icon/Home.png',
-                  width: 20,
-                  color: greenPrimaryColor,
-                ),
-                label: 'Beranda',
-              ),
-              BottomNavigationBarItem(
-                icon: Image.asset(
-                  'asset/icon/Donation.png',
-                  width: 20,
-                  color: greyColor,
-                ),
-                label: 'Donasi',
-              ),
-              BottomNavigationBarItem(
-                icon: Image.asset(
-                  'asset/icon/MoneyReport.png',
-                  width: 20,
-                  color: greyColor,
-                ),
-                label: 'Riwayat',
-              ),
-              BottomNavigationBarItem(
-                icon: Image.asset(
-                  'asset/icon/Profile.png',
-                  width: 20,
-                  color: greyColor,
-                ),
-                label: 'Akun',
-              ),
-            ],
-          ),
-        ),
       appBar: AppBar(
         title: const Text(
           'My Profile',
@@ -118,29 +43,28 @@ class _MyWidgetState extends State<MyWidget> {
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     image: DecorationImage(
-                      image: AssetImage(
-                              'asset/image/profile.jpg',
-                            )
-                    ),
+                        image: AssetImage(
+                      'asset/image/profile.jpg',
+                    )),
                   ),
                   child: Align(
-                          alignment: Alignment.topRight,
-                          child: Container(
-                            width: 28,
-                            height: 28,
-                            decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: whiteColor,
-                            ),
-                            child: Center(
-                              child: Icon(
-                                Icons.check_circle,
-                                color: greenPrimaryColor,
-                                size: 24,
-                              ),
-                            ),
-                          ),
+                    alignment: Alignment.topRight,
+                    child: Container(
+                      width: 28,
+                      height: 28,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: whiteColor,
+                      ),
+                      child: Center(
+                        child: Icon(
+                          Icons.check_circle,
+                          color: greenPrimaryColor,
+                          size: 24,
                         ),
+                      ),
+                    ),
+                  ),
                 ),
                 const SizedBox(
                   height: 16,
@@ -177,7 +101,7 @@ class _MyWidgetState extends State<MyWidget> {
                 ),
                 ProfileMenuItem(
                   iconUrl: 'asset/image/Akun.png',
-                  title: 'Pusat Bantuan', 
+                  title: 'Pusat Bantuan',
                   onTap: () {},
                 ),
                 ProfileMenuItem(

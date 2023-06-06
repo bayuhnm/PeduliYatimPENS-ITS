@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:peduli_yatim_pens_mobile/global/theme.dart';
+import 'package:peduli_yatim_pens_mobile/pages/login_page.dart';
+import 'package:peduli_yatim_pens_mobile/pages/register_page.dart';
+import 'package:peduli_yatim_pens_mobile/pages/splash_page.dart';
 import 'package:peduli_yatim_pens_mobile/widgets/card_activity_report.dart';
 import 'package:peduli_yatim_pens_mobile/widgets/card_article.dart';
 import 'package:peduli_yatim_pens_mobile/widgets/card_donation.dart';
@@ -13,6 +16,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  
   String _searchText = '';
 
   @override
@@ -24,65 +28,6 @@ class _HomePageState extends State<HomePage> {
       ),
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        bottomNavigationBar: BottomAppBar(
-          color: whiteColor,
-          shape: const CircularNotchedRectangle(),
-          clipBehavior: Clip.antiAlias,
-          notchMargin: 6,
-          elevation: 3,
-          child: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            backgroundColor: whiteColor,
-            elevation: 0,
-            selectedItemColor: greenPrimaryColor,
-            unselectedItemColor: blackColor,
-            showSelectedLabels: true,
-            showUnselectedLabels: true,
-            selectedLabelStyle: greenTextStyle.copyWith(
-              fontSize: 10,
-              fontWeight: medium,
-            ),
-            unselectedLabelStyle: blackTextStyle.copyWith(
-              fontSize: 10,
-              fontWeight: medium,
-            ),
-            items: [
-              BottomNavigationBarItem(
-                icon: Image.asset(
-                  'asset/icon/Home.png',
-                  width: 20,
-                  color: greenPrimaryColor,
-                ),
-                label: 'Beranda',
-              ),
-              BottomNavigationBarItem(
-                icon: Image.asset(
-                  'asset/icon/Donation.png',
-                  width: 20,
-                  color: greyColor,
-                ),
-                label: 'Donasi',
-              ),
-              BottomNavigationBarItem(
-                icon: Image.asset(
-                  'asset/icon/MoneyReport.png',
-                  width: 20,
-                  color: greyColor,
-                ),
-                label: 'Riwayat',
-              ),
-              BottomNavigationBarItem(
-                icon: Image.asset(
-                  'asset/icon/Profile.png',
-                  width: 20,
-                  color: greyColor,
-                ),
-                label: 'Akun',
-                
-              ),
-            ],
-          ),
-        ),
         backgroundColor: backgroundGreyColor,
         body: CustomScrollView(
           slivers: [
@@ -143,7 +88,7 @@ class _HomePageState extends State<HomePage> {
                         children: [
                           HomeDonationCategory(
                             iconUrl: 'asset/icon/Calendar.png',
-                            label: 'Donasi Rutin',
+                            label: 'Keuangan',
                             onTap: () {},
                           ),
                           HomeDonationCategory(

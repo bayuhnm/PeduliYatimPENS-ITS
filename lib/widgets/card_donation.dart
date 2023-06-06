@@ -19,14 +19,14 @@ class DonationCard extends StatelessWidget {
     required this.money,
     required this.day,
     }) : super(key: key);
-
+    
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => DetailDonationPage()),
+            MaterialPageRoute(builder: (context) => DetailDonationPage(showNavigationBar: false)),
           );
         },
       child: Container(
