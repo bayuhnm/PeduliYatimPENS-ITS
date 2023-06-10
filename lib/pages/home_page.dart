@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:peduli_yatim_pens_mobile/global/theme.dart';
 import 'package:peduli_yatim_pens_mobile/pages/login_page.dart';
+import 'package:peduli_yatim_pens_mobile/pages/money_report_page.dart';
 import 'package:peduli_yatim_pens_mobile/pages/register_page.dart';
 import 'package:peduli_yatim_pens_mobile/pages/splash_page.dart';
 import 'package:peduli_yatim_pens_mobile/widgets/card_activity_report.dart';
@@ -16,7 +17,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  
   String _searchText = '';
 
   @override
@@ -67,7 +67,6 @@ class _HomePageState extends State<HomePage> {
                       hintStyle:
                           TextStyle(fontFamily: 'opensans', fontSize: 14),
                       prefixIcon: Icon(Icons.search),
-
                       border: InputBorder.none,
                     ),
                   ),
@@ -89,7 +88,14 @@ class _HomePageState extends State<HomePage> {
                           HomeDonationCategory(
                             iconUrl: 'asset/icon/Calendar.png',
                             label: 'Keuangan',
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => MoneyReportPage(),
+                                ),
+                              );
+                            },
                           ),
                           HomeDonationCategory(
                             iconUrl: 'asset/icon/InfaqYatim.png',
@@ -241,7 +247,6 @@ class _HomePageState extends State<HomePage> {
                         SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: Row(
-                            
                             children: [
                               ActivityReportCard(
                                 imageUrl: 'asset/image/imageB2.jpeg',

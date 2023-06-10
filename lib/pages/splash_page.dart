@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:peduli_yatim_pens_mobile/global/theme.dart';
 import 'package:peduli_yatim_pens_mobile/pages/home_page.dart';
+import 'package:peduli_yatim_pens_mobile/pages/login_page.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -18,7 +19,7 @@ class _SplashPageState extends State<SplashPage> {
     Future.delayed(Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => HomePage()),
+        MaterialPageRoute(builder: (context) => LoginPage()),
       );
     });
   }
@@ -34,11 +35,11 @@ class _SplashPageState extends State<SplashPage> {
             Container(
               width: 70,
               height: 70,
-              child: Image.asset('asset/other/logo.png'),
+              child: Image.asset('asset/other/LogoHD.png'),
             ),
             // Image.asset('asset/other/logo.png'),
             SizedBox(
-              height: 20,
+              height: 40,
             ),
             CircularProgressIndicator(
               color: greenPrimaryColor,

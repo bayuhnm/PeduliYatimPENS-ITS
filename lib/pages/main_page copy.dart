@@ -17,6 +17,8 @@ class MainPage extends StatefulWidget {
 class MainPageState extends State<MainPage> {
   int _currentIndex = 0;
   final Color _selectedItemColor = greenPrimaryColor;
+  bool _showNavigationBar = true;
+
   final List<Widget> _pages = [
     HomePage(),
     DonationListPage(),
@@ -41,42 +43,44 @@ class MainPageState extends State<MainPage> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: _pages[_currentIndex],
-        bottomNavigationBar: BottomAppBar(
-          color: whiteColor,
-          shape: const CircularNotchedRectangle(),
-          clipBehavior: Clip.antiAlias,
-          notchMargin: 6,
-          elevation: 3,
-          child: BottomNavigationBar(
-            type: BottomNavigationBarType.fixed,
-            backgroundColor: whiteColor,
-            elevation: 0,
-            selectedItemColor: _selectedItemColor,
-            unselectedItemColor: greyColor,
-            showSelectedLabels: true,
-            showUnselectedLabels: true,
-            selectedLabelStyle: greenTextStyle.copyWith(
-              fontSize: 10,
-              fontWeight: medium,
-            ),
-            unselectedLabelStyle: greyTextStyle.copyWith(
-              fontSize: 10,
-              fontWeight: medium,
-            ),
-            currentIndex: _currentIndex,
-            onTap: _onItemTapped,
-            items: [
-              _buildBottomNavigationBarItem(
-                  'asset/icon/Home2.png', 'Beranda', 0),
-              _buildBottomNavigationBarItem(
-                  'asset/icon/Donation2.png', 'Donasi', 1),
-              _buildBottomNavigationBarItem(
-                  'asset/icon/History2.png', 'Riwayat', 2),
-              _buildBottomNavigationBarItem(
-                  'asset/icon/Profile2.png', 'Akun', 3),
-            ],
-          ),
-        ),
+        bottomNavigationBar: _showNavigationBar
+            ? BottomAppBar(
+                color: whiteColor,
+                shape: const CircularNotchedRectangle(),
+                clipBehavior: Clip.antiAlias,
+                notchMargin: 6,
+                elevation: 3,
+                child: BottomNavigationBar(
+                  type: BottomNavigationBarType.fixed,
+                  backgroundColor: whiteColor,
+                  elevation: 0,
+                  selectedItemColor: _selectedItemColor,
+                  unselectedItemColor: greyColor,
+                  showSelectedLabels: true,
+                  showUnselectedLabels: true,
+                  selectedLabelStyle: greenTextStyle.copyWith(
+                    fontSize: 10,
+                    fontWeight: medium,
+                  ),
+                  unselectedLabelStyle: greyTextStyle.copyWith(
+                    fontSize: 10,
+                    fontWeight: medium,
+                  ),
+                  currentIndex: _currentIndex,
+                  onTap: _onItemTapped,
+                  items: [
+                    _buildBottomNavigationBarItem(
+                        'asset/icon/Home2.png', 'Beranda', 0),
+                    _buildBottomNavigationBarItem(
+                        'asset/icon/Donation2.png', 'Donasi', 1),
+                    _buildBottomNavigationBarItem(
+                        'asset/icon/History2.png', 'Riwayat', 2),
+                    _buildBottomNavigationBarItem(
+                        'asset/icon/Profile2.png', 'Akun', 3),
+                  ],
+                ),
+              )
+            : null,
       ),
     );
   }

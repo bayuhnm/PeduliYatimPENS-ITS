@@ -6,7 +6,7 @@ import 'package:peduli_yatim_pens_mobile/pages/topup_amount_page.dart';
 import '../widgets/percentage_bar.dart';
 
 class DetailDonationPage extends StatelessWidget {
-  const DetailDonationPage({super.key, required bool showNavigationBar});
+  const DetailDonationPage({super.key});
 
   @override
   Widget build(BuildContext context) {

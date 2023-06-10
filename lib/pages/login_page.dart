@@ -81,9 +81,9 @@ class _LoginPageState extends State<LoginPage> {
                         labelText: "Email",
                         labelStyle: TextStyle(
                           // color: Colors.black45,
-                          fontFamily: 'opensans',
+                          fontFamily: 'Open Sans',
                           fontSize: 14,
-                          fontWeight: semiBold,
+                          fontWeight: regular,
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderSide:
@@ -121,9 +121,9 @@ class _LoginPageState extends State<LoginPage> {
                         labelText: "Password",
                         labelStyle: TextStyle(
                           // color: Colors.black45,
-                          fontFamily: 'opensans',
+                          fontFamily: 'Open Sans',
                           fontSize: 14,
-                          fontWeight: semiBold,
+                          fontWeight: regular,
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderSide:
@@ -181,6 +181,10 @@ class _LoginPageState extends State<LoginPage> {
                             ),
                           );
                         },
+                        // onPressed: () {
+                        //   Navigator.pushNamedAndRemoveUntil(
+                        //       context, '/home', (route) => false);
+                        // },
                         child: Text(
                           'Masuk',
                           style: whiteTextStyle.copyWith(fontWeight: medium),

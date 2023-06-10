@@ -66,9 +66,9 @@ class _RegisterPageState extends State<RegisterPage> {
                         labelText: "Nama",
                         labelStyle: TextStyle(
                           // color: Colors.black45,
-                          fontFamily: 'opensans',
+                          fontFamily: 'Open Sans',
                           fontSize: 14,
-                          fontWeight: semiBold,
+                          fontWeight: regular,
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderSide:
@@ -103,9 +103,9 @@ class _RegisterPageState extends State<RegisterPage> {
                         labelText: "Email",
                         labelStyle: TextStyle(
                           // color: Colors.black45,
-                          fontFamily: 'opensans',
+                          fontFamily: 'Open Sans',
                           fontSize: 14,
-                          fontWeight: semiBold,
+                          fontWeight: regular,
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderSide:
@@ -143,9 +143,9 @@ class _RegisterPageState extends State<RegisterPage> {
                         labelText: "Password",
                         labelStyle: TextStyle(
                           // color: Colors.black45,
-                          fontFamily: 'opensans',
+                          fontFamily: 'Open Sans',
                           fontSize: 14,
-                          fontWeight: semiBold,
+                          fontWeight: regular,
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderSide:
@@ -181,9 +181,9 @@ class _RegisterPageState extends State<RegisterPage> {
                         labelText: "Konfirmasi Password",
                         labelStyle: TextStyle(
                           // color: Colors.black45,
-                          fontFamily: 'opensans',
+                          fontFamily: 'Open Sans',
                           fontSize: 14,
-                          fontWeight: semiBold,
+                          fontWeight: regular,
                         ),
                         enabledBorder: OutlineInputBorder(
                           borderSide:

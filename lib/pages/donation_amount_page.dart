@@ -30,7 +30,7 @@ class _DonationAmountPageState extends State<DonationAmountPage> {
         RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]}.');
 
     // Tambahkan "Rp." di depan nominal
-    return 'Rp. $formatted';
+    return '$formatted';
   }
 
   @override
@@ -97,27 +97,34 @@ class _DonationAmountPageState extends State<DonationAmountPage> {
           child: Column(
             children: [
               SizedBox(
-                height: 50,
-                child: TextFormField(
+                height: 100,
+                child: TextField(
+                  style: greenTextStyle.copyWith(
+                    fontSize: 20,
+                    fontWeight: semiBold
+                  ),
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.grey[100],
-                    // hintText: "Masukkan Email",
+                    prefixText: 'Rp. ',
+                    prefixStyle: darkTextStyle.copyWith(
+                      fontSize: 20,
+                      fontWeight: semiBold
+                    ),
                     labelText: "Jumlah Donasi",
                     labelStyle: TextStyle(
-                      // color: Colors.black45,
-                      fontFamily: 'opensans',
-                      fontSize: 14,
-                      fontWeight: semiBold,
+                      fontFamily: 'Open Sans',
+                      fontSize: 16,
+                      fontWeight: medium,
                     ),
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black12, width: 1.2),
-                      borderRadius: BorderRadius.circular(7),
+                      borderRadius: BorderRadius.circular(10),
                     ),
                     focusedBorder: OutlineInputBorder(
                         borderSide:
                             BorderSide(color: greenPrimaryColor, width: 1.2),
-                        borderRadius: BorderRadius.circular(7)),
+                        borderRadius: BorderRadius.circular(10)),
                   ),
                   keyboardType: TextInputType.number,
                   controller: _controller,

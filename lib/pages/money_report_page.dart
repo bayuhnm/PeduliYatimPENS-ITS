@@ -5,14 +5,14 @@ import 'package:intl/intl.dart';
 import 'package:peduli_yatim_pens_mobile/global/theme.dart';
 import 'package:peduli_yatim_pens_mobile/widgets/card_history.dart';
 
-class HistoryPage extends StatefulWidget {
-  const HistoryPage({super.key});
+class MoneyReportPage extends StatefulWidget {
+  const MoneyReportPage({super.key});
 
   @override
-  State<HistoryPage> createState() => _HistoryPageState();
+  State<MoneyReportPage> createState() => _MoneyReportPageState();
 }
 
-class _HistoryPageState extends State<HistoryPage> {
+class _MoneyReportPageState extends State<MoneyReportPage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -30,8 +30,8 @@ class _HistoryPageState extends State<HistoryPage> {
             scrollDirection: Axis.vertical,
             padding: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
             children: [
-              HistoryCard(),
-              HistoryCard(),
+              // HistoryCard(),
+              // HistoryCard(),
 
             ],
           ),

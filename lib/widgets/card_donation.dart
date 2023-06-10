@@ -26,7 +26,7 @@ class DonationCard extends StatelessWidget {
       onTap: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => DetailDonationPage(showNavigationBar: false)),
+            MaterialPageRoute(builder: (context) => DetailDonationPage()),
           );
         },
       child: Container(
