@@ -1,21 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:peduli_yatim_pens_mobile/bloc/payment_method/payment_method_bloc.dart';
 import 'package:peduli_yatim_pens_mobile/global/theme.dart';
+import 'package:peduli_yatim_pens_mobile/models/payment_method_model.dart';
 import 'package:peduli_yatim_pens_mobile/pages/payment_success.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:peduli_yatim_pens_mobile/widgets/bank_item.dart';
 
 class DonationAmountPage extends StatefulWidget {
-  const DonationAmountPage({super.key});
+  const DonationAmountPage({super.key, });
 
   @override
   State<DonationAmountPage> createState() => _DonationAmountPageState();
 }
 
 class _DonationAmountPageState extends State<DonationAmountPage> {
-  TextEditingController _controller = TextEditingController();
+  TextEditingController amountController = TextEditingController(text: '');
+  PaymentMethodModel? selectedPaymentMethod;
 
   @override
   void dispose() {
-    _controller.dispose();
+    amountController.dispose();
     super.dispose();
+  }
+
+  void updateDonationValue(String value) {
+    setState(() {
+      amountController.text = value;
+    });
   }
 
   String formatCurrency(String amount) {
@@ -42,6 +53,7 @@ class _DonationAmountPageState extends State<DonationAmountPage> {
         primarySwatch: myColor,
       ),
       home: Scaffold(
+        backgroundColor: backgroundGreyColor,
         appBar: AppBar(
           toolbarHeight: 50,
           backgroundColor: backgroundDarkGreenColor,
@@ -53,7 +65,7 @@ class _DonationAmountPageState extends State<DonationAmountPage> {
           ),
           centerTitle: true,
           title: Text(
-            'Detail Donasi',
+            'Donasi Anda',
             style: whiteTextStyle.copyWith(fontSize: 18),
           ),
         ),
@@ -93,24 +105,47 @@ class _DonationAmountPageState extends State<DonationAmountPage> {
           ),
         ),
         body: SingleChildScrollView(
-          padding: EdgeInsets.only(left: 15, right: 15, top: 30),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(
-                height: 100,
+              Container(
+                color: whiteColor,
+                width: MediaQuery.of(context).size.width,
+                padding: const EdgeInsets.only(left: 15, right: 15, top: 30, bottom: 5),
+                child: Text(
+                  'Program Donasi',
+                  style: greyTextStyle.copyWith(
+                    fontSize: 12,
+                    fontWeight: medium,
+                  ),
+                ),
+              ),
+              Container(
+                color: whiteColor,
+                width: MediaQuery.of(context).size.width,
+                padding: const EdgeInsets.only(left: 15, right: 15, bottom: 20),
+                child: Text(
+                  'Infaq Yatim Dhuafa',
+                  style: darkTextStyle.copyWith(
+                    fontSize: 18,
+                    fontWeight: semiBold,
+                  ),
+                ),
+              ),
+              SizedBox(height: 10,),
+              Container(
+                color: whiteColor,
+                padding: EdgeInsets.only(left: 15, right: 15, top: 20),
+                height: 110,
                 child: TextField(
                   style: greenTextStyle.copyWith(
-                    fontSize: 20,
-                    fontWeight: semiBold
-                  ),
+                      fontSize: 20, fontWeight: semiBold),
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.grey[100],
                     prefixText: 'Rp. ',
                     prefixStyle: darkTextStyle.copyWith(
-                      fontSize: 20,
-                      fontWeight: semiBold
-                    ),
+                        fontSize: 20, fontWeight: semiBold),
                     labelText: "Jumlah Donasi",
                     labelStyle: TextStyle(
                       fontFamily: 'Open Sans',
@@ -127,10 +162,10 @@ class _DonationAmountPageState extends State<DonationAmountPage> {
                         borderRadius: BorderRadius.circular(10)),
                   ),
                   keyboardType: TextInputType.number,
-                  controller: _controller,
+                  controller: amountController,
                   onChanged: (value) {
                     String formatted = formatCurrency(value);
-                    _controller.value = TextEditingValue(
+                    amountController.value = TextEditingValue(
                       text: formatted,
                       selection:
                           TextSelection.collapsed(offset: formatted.length),
@@ -138,8 +173,138 @@ class _DonationAmountPageState extends State<DonationAmountPage> {
                   },
                 ),
               ),
+              Container(
+                color: whiteColor,
+                padding:
+                    EdgeInsets.only(left: 15, right: 15, bottom: 30),
+                width: MediaQuery.of(context).size.width,
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        DonationButton(
+                          value: '20.000',
+                          onPressed: () => updateDonationValue('20.000'),
+                        ),
+                        DonationButton(
+                          value: '50.000',
+                          onPressed: () => updateDonationValue('50.000'),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        DonationButton(
+                          value: '100.000',
+                          onPressed: () => updateDonationValue('100.000'),
+                        ),
+                        DonationButton(
+                          value: '300.000',
+                          onPressed: () => updateDonationValue('300.000'),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Text(
+                          'Pilih Metode Pembayaran',
+                          style: darkTextStyle.copyWith(
+                            fontSize: 16,
+                            fontWeight: semiBold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    child: BlocProvider(
+                      create: (context) =>
+                          PaymentMethodBloc()..add(PaymentMethodGet()),
+                      child: BlocBuilder<PaymentMethodBloc, PaymentMethodState>(
+                        builder: (context, state) {
+                          if (state is PaymentMethodSuccess) {
+                            return Column(
+                              children: state.data.map((paymentMethod) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      selectedPaymentMethod = paymentMethod;
+                                    });
+                                  },
+                                  child: BankItem(
+                                    data: paymentMethod,
+                                    isSelected: paymentMethod.id ==
+                                        selectedPaymentMethod?.id,
+                                  ),
+                                );
+                              }).toList(),
+                            );
+                          }
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 10)
+                ],
+              )
             ],
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class DonationButton extends StatelessWidget {
+  final String value;
+  final VoidCallback onPressed;
+
+  const DonationButton({
+    required this.value,
+    required this.onPressed,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width * 4 / 9,
+      height: 45,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          elevation: 1,
+          backgroundColor: whiteColor,
+          shape: RoundedRectangleBorder(
+            side: BorderSide(width: 1, color: greenPrimaryColor),
+            borderRadius: BorderRadius.circular(7),
+          ),
+        ),
+        onPressed: onPressed,
+        child: Text(
+          value,
+          style: greenTextStyle.copyWith(fontWeight: semiBold, fontSize: 16),
         ),
       ),
     );

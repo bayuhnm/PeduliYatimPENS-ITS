@@ -22,20 +22,27 @@ class ProfileMenuItem extends StatelessWidget {
           bottom: 30,
         ),
         child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Image.asset(
-              iconUrl,
-              width: 24,
+            Row(
+              children: [
+                Image.asset(
+                  iconUrl,
+                  height: 22,
+                  width: 22,
+                ),
+                const SizedBox(
+                  width: 18,
+                ),
+                Text(
+                  title,
+                  style: darkTextStyle.copyWith(
+                    fontWeight: medium,
+                  ),
+                ),
+              ],
             ),
-            const SizedBox(
-              width: 18,
-            ),
-            Text(
-              title,
-              style: darkTextStyle.copyWith(
-                fontWeight: medium,
-              ),
-            ),
+            Icon(Icons.chevron_right, color: darkColor,)
           ],
         ),
       ),

@@ -12,110 +12,103 @@ class ProfilePage extends StatefulWidget {
 class ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'My Profile',
-        ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primaryColor: myColor,
+        primarySwatch: myColor,
       ),
-      body: ListView(
-        padding: const EdgeInsets.symmetric(
-          horizontal: 24,
-        ),
-        children: [
-          const SizedBox(
-            height: 30,
+      home: Scaffold(
+        backgroundColor: whiteColor,
+        appBar: AppBar(
+          toolbarHeight: 45,
+          elevation: 0,
+          titleTextStyle: darkTextStyle.copyWith(
+            fontSize: 18,
+            fontWeight: medium,
           ),
-          Container(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 30,
-              vertical: 22,
+          centerTitle: true,
+          backgroundColor: whiteColor,
+          title: Column(
+            children: [
+              SizedBox(height: 13,),
+              Text(
+                'Riwayat Donasi',
+                style: darkTextStyle,
+              ),
+            ],
+          ),
+        ),
+        body: ListView(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 15,
+          ),
+          children: [
+            const SizedBox(
+              height: 20,
             ),
-            decoration: BoxDecoration(
-              color: whiteColor,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Column(
-              children: [
-                Container(
-                  width: 120,
-                  height: 120,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                        image: AssetImage(
-                      'asset/image/profile.jpg',
-                    )),
-                  ),
-                  child: Align(
-                    alignment: Alignment.topRight,
-                    child: Container(
-                      width: 28,
-                      height: 28,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: whiteColor,
-                      ),
-                      child: Center(
-                        child: Icon(
-                          Icons.check_circle,
-                          color: greenPrimaryColor,
-                          size: 24,
-                        ),
-                      ),
+            Container(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 15,
+                vertical: 20,
+              ),
+              child: Column(
+                children: [
+                  Container(
+                    width: 100,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                          image: AssetImage(
+                        'asset/image/blank_profile.png',
+                      )),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                Text(
-                  'Shayna Hanna',
-                  style: blackTextStyle.copyWith(
-                    fontSize: 18,
-                    fontWeight: medium,
+                  const SizedBox(
+                    height: 16,
                   ),
-                ),
-                const SizedBox(
-                  height: 40,
-                ),
-                ProfileMenuItem(
-                  iconUrl: 'asset/image/Wallet.png',
-                  title: 'Donasi Saya',
-                  onTap: () async {},
-                ),
-                ProfileMenuItem(
-                  iconUrl: 'asset/image/Akun.png',
-                  title: 'Informasi Akun',
-                  onTap: () async {},
-                ),
-                ProfileMenuItem(
-                  iconUrl: 'asset/image/Akun.png',
-                  title: 'Verifikasi Akun',
-                  onTap: () {},
-                ),
-                ProfileMenuItem(
-                  iconUrl: 'asset/image/Gear.png',
-                  title: 'Pengaturan',
-                  onTap: () {},
-                ),
-                ProfileMenuItem(
-                  iconUrl: 'asset/image/Akun.png',
-                  title: 'Pusat Bantuan',
-                  onTap: () {},
-                ),
-                ProfileMenuItem(
-                  iconUrl: 'asset/image/Akun.png',
-                  title: 'Log Out',
-                  onTap: () {},
-                ),
-              ],
+                  Text(
+                    'Bayu Hidayah',
+                    style: blackTextStyle.copyWith(
+                      fontSize: 18,
+                      fontWeight: medium,
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  ProfileMenuItem(
+                    iconUrl: 'asset/icon/DonasiSaya.png',
+                    title: 'Donasi Saya',
+                    onTap: () {},
+                  ),
+                  ProfileMenuItem(
+                    iconUrl: 'asset/icon/InformasiAkun.png',
+                    title: 'Informasi Akun',
+                    onTap: () {},
+                  ),
+                  ProfileMenuItem(
+                    iconUrl: 'asset/icon/PusatBantuan.png',
+                    title: 'Pusat Bantuan',
+                    onTap: () {},
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  ProfileMenuItem(
+                    iconUrl: 'asset/icon/Logout.png',
+                    title: 'Log Out',
+                    onTap: () {},
+                  ),
+                ],
+              ),
             ),
-          ),
-          const SizedBox(
-            height: 87,
-          ),
-        ],
+            const SizedBox(
+              height: 87,
+            ),
+          ],
+        ),
       ),
     );
   }

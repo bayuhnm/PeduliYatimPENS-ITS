@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:peduli_yatim_pens_mobile/global/theme.dart';
+import 'package:peduli_yatim_pens_mobile/pages/donation_amount_page.dart';
 
 class HomeDonationCategory extends StatelessWidget {
   final String iconUrl;
@@ -82,17 +83,32 @@ class MoreDialog extends StatelessWidget {
                   HomeDonationCategory(
                     iconUrl: 'asset/icon/Swakelola.png',
                     label: 'Swakelola',
-                    onTap: () {},
+                    onTap: () {Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DonationAmountPage(),
+                                ),
+                              );},
                   ),
                   HomeDonationCategory(
                     iconUrl: 'asset/icon/WaqafTanah.png',
                     label: 'Waqaf Tanah',
-                    onTap: () {},
+                    onTap: () {Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DonationAmountPage(),
+                                ),
+                              );},
                   ),
                   HomeDonationCategory(
                     iconUrl: 'asset/icon/Modal.png',
                     label: 'Modal',
-                    onTap: () {},
+                    onTap: () {Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DonationAmountPage(),
+                                ),
+                              );},
                   ),
                 ],
               ),

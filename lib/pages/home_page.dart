@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:peduli_yatim_pens_mobile/global/theme.dart';
+import 'package:peduli_yatim_pens_mobile/pages/donation_amount_page.dart';
 import 'package:peduli_yatim_pens_mobile/pages/login_page.dart';
 import 'package:peduli_yatim_pens_mobile/pages/money_report_page.dart';
 import 'package:peduli_yatim_pens_mobile/pages/register_page.dart';
@@ -32,43 +33,53 @@ class _HomePageState extends State<HomePage> {
         body: CustomScrollView(
           slivers: [
             SliverAppBar(
-              toolbarHeight: 50,
+              toolbarHeight: 80,
               floating: true,
               pinned: true,
               snap: false,
-              centerTitle: false,
-              title: Text(
-                'Peduli Yatim PENS-ITS',
-                style: whiteTextStyle.copyWith(
-                  fontSize: 18,
-                ),
+              centerTitle: true,
+              title: Column(
+                children: [
+                  SizedBox(height: 17,),
+                  Image.asset(
+                    'asset/other/LogoHD.png',
+                    height: 60,
+                  ),
+                ],
               ),
               backgroundColor: backgroundDarkGreenColor,
-              actions: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.notifications),
-                )
-              ],
+              // actions: [
+              //   IconButton(
+              //     onPressed: () {},
+              //     icon: const Icon(Icons.notifications),
+              //   )
+              // ],
               bottom: AppBar(
                 toolbarHeight: 50,
                 elevation: 0,
                 backgroundColor: backgroundDarkGreenColor,
-                title: Container(
-                  width: double.infinity,
-                  height: 36,
-                  decoration: BoxDecoration(
-                    color: whiteColor,
-                    borderRadius: BorderRadius.circular(30),
-                  ),
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: 'Cari donasi',
-                      hintStyle:
-                          TextStyle(fontFamily: 'opensans', fontSize: 14),
-                      prefixIcon: Icon(Icons.search),
-                      border: InputBorder.none,
-                    ),
+                // title: Container(
+                //   width: double.infinity,
+                //   height: 36,
+                //   decoration: BoxDecoration(
+                //     color: whiteColor,
+                //     borderRadius: BorderRadius.circular(30),
+                //   ),
+                //   child: TextField(
+                //     decoration: InputDecoration(
+                //       hintText: 'Cari donasi',
+                //       hintStyle:
+                //           TextStyle(fontFamily: 'opensans', fontSize: 14),
+                //       prefixIcon: Icon(Icons.search),
+                //       border: InputBorder.none,
+                //     ),
+                //   ),
+                // ),
+                centerTitle: true,
+                title: Text(
+                  'Peduli Yatim PENS-ITS',
+                  style: whiteTextStyle.copyWith(
+                    fontSize: 18,
                   ),
                 ),
               ),
@@ -100,12 +111,24 @@ class _HomePageState extends State<HomePage> {
                           HomeDonationCategory(
                             iconUrl: 'asset/icon/InfaqYatim.png',
                             label: 'Infaq Yatim',
-                            onTap: () {},
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DonationAmountPage(),
+                                ),
+                              );
+                            },
                           ),
                           HomeDonationCategory(
                             iconUrl: 'asset/icon/Zakat.png',
                             label: 'Zakat',
-                            onTap: () {},
+                            onTap: () {Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => DonationAmountPage(),
+                                ),
+                              );},
                           ),
                           HomeDonationCategory(
                             iconUrl: 'asset/icon/Category.png',

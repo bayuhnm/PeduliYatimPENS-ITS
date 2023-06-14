@@ -18,17 +18,17 @@ class DonationCard extends StatelessWidget {
     required this.percentage,
     required this.money,
     required this.day,
-    }) : super(key: key);
-    
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => DetailDonationPage()),
-          );
-        },
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => DetailDonationPage()),
+        );
+      },
       child: Container(
         margin: const EdgeInsets.only(left: 15, bottom: 20),
         height: 210,
@@ -72,12 +72,17 @@ class DonationCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
+                    Container(
                       height: 30,
+                      width: 200,
                       child: Text(
                         donationTitle,
                         style: darkTextStyle.copyWith(
-                            fontSize: 12, fontWeight: semiBold),
+                          fontSize: 12,
+                          fontWeight: semiBold,
+                        ),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
                       ),
                     ),
                     const SizedBox(

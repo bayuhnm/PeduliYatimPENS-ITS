@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:peduli_yatim_pens_mobile/bloc/auth/auth_bloc.dart';
 import 'package:peduli_yatim_pens_mobile/global/theme.dart';
 import 'package:peduli_yatim_pens_mobile/pages/home_page.dart';
 import 'package:peduli_yatim_pens_mobile/pages/login_page.dart';

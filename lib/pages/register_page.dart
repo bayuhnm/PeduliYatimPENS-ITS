@@ -1,22 +1,67 @@
 import 'package:flutter/material.dart';
+import 'package:peduli_yatim_pens_mobile/bloc/auth/auth_bloc.dart';
 import 'package:peduli_yatim_pens_mobile/global/theme.dart';
+import 'package:peduli_yatim_pens_mobile/models/register_form_model.dart';
 import 'package:peduli_yatim_pens_mobile/pages/login_page.dart';
-
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:peduli_yatim_pens_mobile/pages/register_profile_page.dart';
 
 class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
+  const RegisterPage({Key? key}) : super(key: key);
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  bool passwordVisible = false;
 
- bool passwordVisible = false;
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final nameController = TextEditingController(text: '');
+  final emailController = TextEditingController(text: '');
+  final passwordController = TextEditingController(text: '');
+  final confirmPasswordController = TextEditingController(text: '');
 
- @override
-  void initState() {
-    super.initState();
+  bool validate() {
+    print(nameController.text);
+
+    if (nameController.text.isEmpty ||
+        emailController.text.isEmpty ||
+        passwordController.text.isEmpty ||
+        confirmPasswordController.text.isEmpty) {
+      return false;
+    }
+
+    return true;
+  }
+
+  // @override
+  // void dispose() {
+  //   emailController.dispose();
+  //   passwordController.dispose();
+  //   super.dispose();
+  // }
+
+  String? _validatePassword(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Password is required';
+    }
+    if (value.length < 6) {
+      return 'Password must be at least 6 characters long';
+    }
+    return null;
+  }
+
+  String? _validateConfirmPassword(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Confirm Password is required';
+    }
+    if (value != passwordController.text) {
+      return 'Passwords do not match';
+    }
+    return null;
   }
 
   @override
@@ -41,8 +86,8 @@ class _RegisterPageState extends State<RegisterPage> {
                   Text(
                     'Daftar Akun',
                     textAlign: TextAlign.start,
-                    style: darkTextStyle.copyWith(
-                        fontSize: 24, fontWeight: bold),
+                    style:
+                        darkTextStyle.copyWith(fontSize: 24, fontWeight: bold),
                   ),
                   SizedBox(
                     height: 15,
@@ -59,6 +104,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   SizedBox(
                     height: 50,
                     child: TextFormField(
+                      controller: nameController,
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: Colors.grey[100],
@@ -80,22 +126,16 @@ class _RegisterPageState extends State<RegisterPage> {
                                 color: greenPrimaryColor, width: 1.2),
                             borderRadius: BorderRadius.circular(7)),
                       ),
-                      validator: (value) {
-                        if (value == null ||
-                            value.isEmpty ||
-                            !value.contains('@') ||
-                            !value.contains('.')) {
-                          return 'Format email salah';
-                        }
-                        return null;
-                      },
                       keyboardType: TextInputType.emailAddress,
                     ),
                   ),
-                  SizedBox(height: 15,),
+                  SizedBox(
+                    height: 15,
+                  ),
                   SizedBox(
                     height: 50,
                     child: TextFormField(
+                      controller: emailController,
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: Colors.grey[100],
@@ -117,15 +157,6 @@ class _RegisterPageState extends State<RegisterPage> {
                                 color: greenPrimaryColor, width: 1.2),
                             borderRadius: BorderRadius.circular(7)),
                       ),
-                      validator: (value) {
-                        if (value == null ||
-                            value.isEmpty ||
-                            !value.contains('@') ||
-                            !value.contains('.')) {
-                          return 'Invalid Email';
-                        }
-                        return null;
-                      },
                       keyboardType: TextInputType.emailAddress,
                     ),
                   ),
@@ -135,6 +166,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   SizedBox(
                     height: 50,
                     child: TextFormField(
+                      controller: passwordController,
                       obscureText: passwordVisible,
                       keyboardType: TextInputType.visiblePassword,
                       decoration: InputDecoration(
@@ -167,12 +199,19 @@ class _RegisterPageState extends State<RegisterPage> {
                           },
                         ),
                       ),
+                      validator: _validatePassword,
+                      onChanged: (_) {
+                        _formKey.currentState?.validate();
+                      },
                     ),
                   ),
-                  SizedBox(height: 15,),
+                  SizedBox(
+                    height: 15,
+                  ),
                   SizedBox(
                     height: 50,
                     child: TextFormField(
+                      controller: confirmPasswordController,
                       obscureText: true,
                       keyboardType: TextInputType.visiblePassword,
                       decoration: InputDecoration(
@@ -195,6 +234,10 @@ class _RegisterPageState extends State<RegisterPage> {
                                 color: greenPrimaryColor, width: 1.2),
                             borderRadius: BorderRadius.circular(7)),
                       ),
+                      validator: _validateConfirmPassword,
+                      onChanged: (_) {
+                        _formKey.currentState?.validate();
+                      },
                     ),
                   ),
                   const SizedBox(
@@ -205,26 +248,71 @@ class _RegisterPageState extends State<RegisterPage> {
                     child: Container(
                       height: 50,
                       width: double.infinity,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => LoginPage(),
+                      child: BlocConsumer<AuthBloc, AuthState>(
+                        listener: (context, state) {
+                          if (state is AuthCheckEmailSuccess) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => RegisterSetProfilePage(
+                                  data: RegisterFormModel(
+                                    name: nameController.text,
+                                    email: emailController.text,
+                                    password: passwordController.text,
+                                  ),
+                                ),
+                              ),
+                            );
+                          }
+
+                          if (state is AuthFailed) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  state.e,
+                                ),
+                                backgroundColor: redColor,
+                              ),
+                            );
+                          }
+                        },
+                        builder: (context, state) {
+                          if (state is AuthLoading) {
+                            return const Center(
+                              child: CircularProgressIndicator(),
+                            );
+                          }
+                          return ElevatedButton(
+                            onPressed: () {
+                              if (validate()) {
+                                context
+                                    .read<AuthBloc>()
+                                    .add(AuthCheckEmail(emailController.text));
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: const Text(
+                                      'Semua field harus diisi',
+                                    ),
+                                    backgroundColor: redColor,
+                                  ),
+                                );
+                              }
+                            },
+                            child: Text(
+                              'Daftar',
+                              style:
+                                  whiteTextStyle.copyWith(fontWeight: medium),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: darkColor,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(
+                                    7), // set the desired radius
+                              ),
                             ),
                           );
                         },
-                        child: Text(
-                          'Daftar',
-                          style: whiteTextStyle.copyWith(fontWeight: medium),
-                        ),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: darkColor,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(
-                                7), // set the desired radius
-                          ),
-                        ),
                       ),
                     ),
                   ),
@@ -242,11 +330,7 @@ class _RegisterPageState extends State<RegisterPage> {
                               fontSize: 14, fontWeight: medium),
                         ),
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => LoginPage()),
-                          );
+                          Navigator.pushNamed(context, '/login');
                         },
                       )
                     ],
