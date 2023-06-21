@@ -45,7 +45,7 @@ class HistoryCard extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      'Rp. 20.000',
+                      'Rp. 10.000',
                       textAlign: TextAlign.right,
                       style: greenTextStyle.copyWith(
                           fontSize: 14, fontWeight: semiBold),

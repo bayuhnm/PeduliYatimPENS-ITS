@@ -1,27 +1,57 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:peduli_yatim_pens_mobile/global/theme.dart';
+import 'package:peduli_yatim_pens_mobile/models/donation_program_model.dart';
 import 'package:peduli_yatim_pens_mobile/pages/detail_donation_program.page.dart';
 import 'percentage_bar.dart';
 
 class DonationCard extends StatelessWidget {
-  final String imageUrl;
-  final String donationTitle;
-  final double percentage;
-  final String money;
-  final String day;
+  final DonationProgramModel data;
+  String urlImage = 'https://donasi.peduliyatim.or.id/img/asset/donateprogram/';
+  final String? currentDonateAmount;
+  final String? endAt;
 
-  const DonationCard({
+  DonationCard({
     Key? key,
-    required this.imageUrl,
-    required this.donationTitle,
-    required this.percentage,
-    required this.money,
-    required this.day,
+    required this.data,
+    this.currentDonateAmount,
+    this.endAt
   }) : super(key: key);
+
+String formatCurrency(String currentDonateAmount) {
+    // Hapus semua karakter yang bukan digit
+    String digitsOnly = currentDonateAmount.replaceAll(RegExp(r'[^\d]'), '');
+
+    // Parsing sebagai integer
+    int value = int.tryParse(digitsOnly) ?? 0;
+
+    // Format nominal dengan titik sebagai digit
+    String formatted = value.toString().replaceAllMapped(
+        RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]}.');
+
+    // Tambahkan "Rp." di depan nominal
+    return '$formatted';
+  }
+
+double calculatePercentage( String currentDonateAmount, String donateGoal) {
+    double currentAmount = double.tryParse(currentDonateAmount) ?? 0;
+    double goal = double.tryParse(donateGoal) ?? 1; // Avoid division by zero
+
+    double percentage = (currentAmount / goal) * 100;
+    percentage *= 2;
+
+    return percentage;
+  }
 
   @override
   Widget build(BuildContext context) {
+
+    final formattedAmount = NumberFormat('#,##0', 'id_ID').format(int.parse(currentDonateAmount!));
+
+    final endAt = DateTime.parse(data.endAt!);
+    final now = DateTime.now();
+    final remainingDays = endAt.difference(now).inDays;
+
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -62,8 +92,8 @@ class DonationCard extends StatelessWidget {
             children: [
               AspectRatio(
                 aspectRatio: 16 / 9,
-                child: Image.asset(
-                  imageUrl,
+                child: Image.network(
+                  urlImage + data.photo!,
                   fit: BoxFit.fitWidth,
                 ),
               ),
@@ -76,7 +106,7 @@ class DonationCard extends StatelessWidget {
                       height: 30,
                       width: 200,
                       child: Text(
-                        donationTitle,
+                        data.name!,
                         style: darkTextStyle.copyWith(
                           fontSize: 12,
                           fontWeight: semiBold,
@@ -88,7 +118,7 @@ class DonationCard extends StatelessWidget {
                     const SizedBox(
                       height: 15,
                     ),
-                    PercentageBar(percentage: percentage, width: 184),
+                    PercentageBar(percentage: 40, width: 184),
                     const SizedBox(
                       height: 10,
                     ),
@@ -109,7 +139,7 @@ class DonationCard extends StatelessWidget {
                             ),
                             child: Center(
                               child: Text(
-                                'Rp. $money,-',
+                                'Rp. $formattedAmount,-',
                                 style: greenTextStyle.copyWith(
                                   fontSize: 12,
                                   fontWeight: bold,
@@ -119,7 +149,7 @@ class DonationCard extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          '$day Hari lagi',
+                          '$remainingDays Hari lagi',
                           style: darkTextStyle.copyWith(
                             fontSize: 11,
                             fontWeight: medium,

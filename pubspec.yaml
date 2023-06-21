@@ -47,7 +47,9 @@ dependencies:
   mailer: ^6.0.1
   image_picker: ^0.8.8
   flutter_secure_storage: 5.0.2
-  midtrans_sdk: ^0.0.2
+  webview_flutter: ^4.2.2
+  midtrans_snap: ^0.0.3
+  toolkit: ^0.3.2
 
 flutter_icons:
   android: "launcher_icon"

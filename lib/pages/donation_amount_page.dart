@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:peduli_yatim_pens_mobile/bloc/payment_method/payment_method_bloc.dart';
 import 'package:peduli_yatim_pens_mobile/global/theme.dart';
 import 'package:peduli_yatim_pens_mobile/models/payment_method_model.dart';
+import 'package:peduli_yatim_pens_mobile/pages/midtrans_page.dart';
 import 'package:peduli_yatim_pens_mobile/pages/payment_success.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:peduli_yatim_pens_mobile/widgets/bank_item.dart';
 
 class DonationAmountPage extends StatefulWidget {
-  const DonationAmountPage({super.key, });
+  const DonationAmountPage({Key? key});
 
   @override
   State<DonationAmountPage> createState() => _DonationAmountPageState();
@@ -39,6 +40,8 @@ class _DonationAmountPageState extends State<DonationAmountPage> {
     // Format nominal dengan titik sebagai digit
     String formatted = value.toString().replaceAllMapped(
         RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]}.');
+
+    print(formatted);
 
     // Tambahkan "Rp." di depan nominal
     return '$formatted';
@@ -85,7 +88,7 @@ class _DonationAmountPageState extends State<DonationAmountPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => PaymentSuccessPage(),
+                      builder: (context) => MidtransPage(amountDonation: amountController.text),
                     ),
                   );
                 },
@@ -96,8 +99,7 @@ class _DonationAmountPageState extends State<DonationAmountPage> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: greenPrimaryColor,
                   shape: RoundedRectangleBorder(
-                    borderRadius:
-                        BorderRadius.circular(10), // set the desired radius
+                    borderRadius: BorderRadius.circular(10), // set the desired radius
                   ),
                 ),
               ),
@@ -185,11 +187,11 @@ class _DonationAmountPageState extends State<DonationAmountPage> {
                       children: [
                         DonationButton(
                           value: '20.000',
-                          onPressed: () => updateDonationValue('20.000'),
+                          onPressed: () => updateDonationValue('20000'.toString()),
                         ),
                         DonationButton(
                           value: '50.000',
-                          onPressed: () => updateDonationValue('50.000'),
+                          onPressed: () => updateDonationValue('50000'.toString()),
                         ),
                       ],
                     ),
@@ -201,11 +203,11 @@ class _DonationAmountPageState extends State<DonationAmountPage> {
                       children: [
                         DonationButton(
                           value: '100.000',
-                          onPressed: () => updateDonationValue('100.000'),
+                          onPressed: () => updateDonationValue('100000'.toString()),
                         ),
                         DonationButton(
                           value: '300.000',
-                          onPressed: () => updateDonationValue('300.000'),
+                          onPressed: () => updateDonationValue('300000'.toString()),
                         ),
                       ],
                     )
@@ -215,61 +217,7 @@ class _DonationAmountPageState extends State<DonationAmountPage> {
               const SizedBox(
                 height: 30,
               ),
-              Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Text(
-                          'Pilih Metode Pembayaran',
-                          style: darkTextStyle.copyWith(
-                            fontSize: 16,
-                            fontWeight: semiBold,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 15,
-                  ),
-                  Container(
-                    padding: EdgeInsets.symmetric(horizontal: 15),
-                    child: BlocProvider(
-                      create: (context) =>
-                          PaymentMethodBloc()..add(PaymentMethodGet()),
-                      child: BlocBuilder<PaymentMethodBloc, PaymentMethodState>(
-                        builder: (context, state) {
-                          if (state is PaymentMethodSuccess) {
-                            return Column(
-                              children: state.data.map((paymentMethod) {
-                                return GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      selectedPaymentMethod = paymentMethod;
-                                    });
-                                  },
-                                  child: BankItem(
-                                    data: paymentMethod,
-                                    isSelected: paymentMethod.id ==
-                                        selectedPaymentMethod?.id,
-                                  ),
-                                );
-                              }).toList(),
-                            );
-                          }
-                          return const Center(
-                            child: CircularProgressIndicator(),
-                          );
-                        },
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 10)
-                ],
-              )
+             
             ],
           ),
         ),

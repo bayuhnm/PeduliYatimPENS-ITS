@@ -18,9 +18,12 @@ class ProfileMenuItem extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: const EdgeInsets.only(
-          bottom: 30,
+        margin: EdgeInsets.only(
+          bottom: 10
         ),
+        padding: EdgeInsets.all(15),
+        decoration: BoxDecoration(
+            color: whiteColor, borderRadius: BorderRadius.circular(7)),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -42,7 +45,10 @@ class ProfileMenuItem extends StatelessWidget {
                 ),
               ],
             ),
-            Icon(Icons.chevron_right, color: darkColor,)
+            Icon(
+              Icons.chevron_right,
+              color: darkColor,
+            )
           ],
         ),
       ),

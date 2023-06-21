@@ -1,0 +1,36 @@
+import 'package:flutter/material.dart';
+import 'package:midtrans_snap/midtrans_snap.dart';
+import 'package:midtrans_snap/models.dart';
+import 'package:midtrans_snap/constants.dart';
+import 'package:http/http.dart' as http;
+
+class MidtransPage extends StatefulWidget {
+  const MidtransPage({super.key});
+
+  @override
+  State<MidtransPage> createState() => _MidtransPageState();
+}
+
+class _MidtransPageState extends State<MidtransPage> {
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: MidtransSnap(
+          mode: MidtransEnvironment.sandbox,
+          token: '989d825a-a7ba-42da-92d9-27ca0a9d230b',
+          midtransClientKey: 'SB-Mid-client-4ooGscwcUeWbvLN4',
+          onPageFinished: (url) {
+            print(url);
+          },
+          onPageStarted: (url) {
+            print(url);
+          },
+          onResponse: (result) {
+            print(result.toJson());
+          },
+        ),
+    );
+  }
+}

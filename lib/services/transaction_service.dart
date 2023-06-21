@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:peduli_yatim_pens_mobile/models/payment_method_model.dart';
 import 'package:http/http.dart' as http;
 import 'package:peduli_yatim_pens_mobile/services/auth_service.dart';
@@ -12,7 +13,7 @@ class TransactionService {
       Uri.parse('$baseUrl/payment-methods'),
     );
 
-    print(res.body);
+    log(res.body);
 
     if (res.statusCode == 200) {
       List<PaymentMethodModel> paymentMethods = [];

@@ -1,0 +1,55 @@
+ Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Text(
+                          'Pilih Metode Pembayaran',
+                          style: darkTextStyle.copyWith(
+                            fontSize: 16,
+                            fontWeight: semiBold,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    child: BlocProvider(
+                      create: (context) =>
+                          PaymentMethodBloc()..add(PaymentMethodGet()),
+                      child: BlocBuilder<PaymentMethodBloc, PaymentMethodState>(
+                        builder: (context, state) {
+                          if (state is PaymentMethodSuccess) {
+                            return Column(
+                              children: state.data.map((paymentMethod) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      selectedPaymentMethod = paymentMethod;
+                                    });
+                                  },
+                                  child: BankItem(
+                                    data: paymentMethod,
+                                    isSelected: paymentMethod.id ==
+                                        selectedPaymentMethod?.id,
+                                  ),
+                                );
+                              }).toList(),
+                            );
+                          }
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 10)
+                ],
+              )

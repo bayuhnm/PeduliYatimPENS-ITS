@@ -1,6 +1,8 @@
 import 'package:peduli_yatim_pens_mobile/models/login_form_model.dart';
 import 'package:peduli_yatim_pens_mobile/models/register_form_model.dart';
 import 'package:peduli_yatim_pens_mobile/models/user_model.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 import 'package:peduli_yatim_pens_mobile/services/auth_service.dart';
 import 'package:bloc/bloc.dart';
@@ -71,6 +73,37 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           emit(AuthFailed(e.toString()));
         }
       }
+
+      // @override
+      // Stream<AuthState> mapEventToState(AuthEvent event) async* {
+      //   if (event is LoginEvent) {
+      //     yield AuthLoading();
+
+      //     try {
+      //       final response = await http.post(
+      //         Uri.parse('https://donasi.peduliyatim.or.id/api/login'),
+      //         body: {
+      //           'email': event.email,
+      //           'password': event.password,
+      //         },
+      //       );
+
+      //       final jsonData = json.decode(response.body);
+
+      //       if (jsonData['success']) {
+      //         final accessToken = jsonData['data']['access_token'];
+      //         yield AuthAuthenticated(accessToken);
+      //       } else {
+      //         final errorMessage = jsonData['message'];
+      //         yield AuthUnauthenticated(errorMessage);
+      //       }
+      //     } catch (e) {
+      //       yield AuthUnauthenticated('An error occurred');
+      //     }
+      //   } else if (event is LogoutEvent) {
+      //     // Perform logout logic
+      //   }
+      // }
 
       // if (event is AuthUpdateUser) {
       //   try {

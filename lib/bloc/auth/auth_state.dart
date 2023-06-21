@@ -28,3 +28,15 @@ class AuthSuccess extends AuthState {
   @override
   List<Object> get props => [data];
 }
+
+// class AuthAuthenticated extends AuthState {
+//   final String token;
+
+//   AuthAuthenticated(this.token);
+// }
+
+// class AuthUnauthenticated extends AuthState {
+//   final String errorMessage;
+
+//   AuthUnauthenticated(this.errorMessage);
+// }

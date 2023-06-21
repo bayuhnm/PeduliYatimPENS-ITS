@@ -19,7 +19,7 @@ class ProfilePageState extends State<ProfilePage> {
         primarySwatch: myColor,
       ),
       home: Scaffold(
-        backgroundColor: whiteColor,
+        backgroundColor: backgroundGreyColor,
         appBar: AppBar(
           toolbarHeight: 45,
           elevation: 0,
@@ -28,10 +28,12 @@ class ProfilePageState extends State<ProfilePage> {
             fontWeight: medium,
           ),
           centerTitle: true,
-          backgroundColor: whiteColor,
+          backgroundColor: Colors.transparent,
           title: Column(
             children: [
-              SizedBox(height: 13,),
+              SizedBox(
+                height: 12,
+              ),
               Text(
                 'Riwayat Donasi',
                 style: darkTextStyle,
@@ -41,7 +43,7 @@ class ProfilePageState extends State<ProfilePage> {
         ),
         body: ListView(
           padding: const EdgeInsets.symmetric(
-            horizontal: 15,
+            horizontal: 5,
           ),
           children: [
             const SizedBox(
@@ -49,7 +51,7 @@ class ProfilePageState extends State<ProfilePage> {
             ),
             Container(
               padding: const EdgeInsets.symmetric(
-                horizontal: 15,
+                horizontal: 10,
                 vertical: 20,
               ),
               child: Column(
@@ -96,16 +98,44 @@ class ProfilePageState extends State<ProfilePage> {
                   SizedBox(
                     height: 30,
                   ),
-                  ProfileMenuItem(
-                    iconUrl: 'asset/icon/Logout.png',
-                    title: 'Log Out',
+                  GestureDetector(
                     onTap: () {},
-                  ),
+                    child: Container(
+                      padding: EdgeInsets.all(15),
+                      decoration: BoxDecoration(color: whiteColor, borderRadius: BorderRadius.circular(7)),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              Image.asset(
+                                'asset/icon/Logout.png',
+                                height: 22,
+                                width: 22,
+                                color: redColor,
+                              ),
+                              const SizedBox(
+                                width: 18,
+                              ),
+                              Text(
+                                'Log Out',
+                                style: darkTextStyle.copyWith(
+                                  color: redColor,
+                                  fontWeight: medium,
+                                ),
+                              ),
+                            ],
+                          ),
+                          Icon(
+                            Icons.chevron_right,
+                            color: redColor,
+                          )
+                        ],
+                      ),
+                    ),
+                  )
                 ],
               ),
-            ),
-            const SizedBox(
-              height: 87,
             ),
           ],
         ),

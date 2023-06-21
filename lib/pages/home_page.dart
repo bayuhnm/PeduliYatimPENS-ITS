@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:peduli_yatim_pens_mobile/bloc/donation_program/donation_program_bloc.dart';
 import 'package:peduli_yatim_pens_mobile/global/theme.dart';
 import 'package:peduli_yatim_pens_mobile/pages/donation_amount_page.dart';
 import 'package:peduli_yatim_pens_mobile/pages/login_page.dart';
@@ -40,7 +42,9 @@ class _HomePageState extends State<HomePage> {
               centerTitle: true,
               title: Column(
                 children: [
-                  SizedBox(height: 17,),
+                  SizedBox(
+                    height: 15,
+                  ),
                   Image.asset(
                     'asset/other/LogoHD.png',
                     height: 60,
@@ -123,12 +127,14 @@ class _HomePageState extends State<HomePage> {
                           HomeDonationCategory(
                             iconUrl: 'asset/icon/Zakat.png',
                             label: 'Zakat',
-                            onTap: () {Navigator.push(
+                            onTap: () {
+                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => DonationAmountPage(),
                                 ),
-                              );},
+                              );
+                            },
                           ),
                           HomeDonationCategory(
                             iconUrl: 'asset/icon/Category.png',
@@ -187,40 +193,35 @@ class _HomePageState extends State<HomePage> {
                         ),
                         SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: [
-                              DonationCard(
-                                imageUrl: 'asset/image/imageA2.jpg',
-                                donationTitle:
-                                    'Bantu Pembangunan Masjid Jami Al-Mukminin',
-                                money: '67.000.000',
-                                day: '39',
-                                percentage: 26,
-                              ),
-                              DonationCard(
-                                imageUrl: 'asset/image/imageA5.jpg',
-                                donationTitle:
-                                    'Bantu Pembelian Fasilitas Belajar Yayasan At-Thoha',
-                                money: '7.820.000',
-                                day: '17',
-                                percentage: 68,
-                              ),
-                              DonationCard(
-                                imageUrl: 'asset/image/imageA1.jpg',
-                                donationTitle: 'Bantuan Donasi 500 Al-Quran',
-                                money: '20.300.000',
-                                day: '27',
-                                percentage: 37,
-                              ),
-                              DonationCard(
-                                imageUrl: 'asset/image/imageA6.jpg',
-                                donationTitle:
-                                    'Bantuan Sembako Untuk Fakir Miskin Sekitar PENS',
-                                money: '23.000.000',
-                                day: '3',
-                                percentage: 89,
-                              ),
-                            ],
+                          child: BlocProvider(
+                            create: (context) => DonationProgramBloc()
+                              ..add(DonationProgramGet()),
+                            child: BlocBuilder<DonationProgramBloc,
+                                DonationProgramState>(
+                              builder: (context, state) {
+                                if (state is DonationProgramSuccess) {
+                                  final temporaryPrograms = state.data
+                                      .where((donationProgram) =>
+                                          donationProgram.programType ==
+                                          'temporary')
+                                      .toList();
+
+                                  return Row(
+                                    children: temporaryPrograms
+                                        .map((donationProgram) {
+                                      return DonationCard(
+                                        data: donationProgram,
+                                        currentDonateAmount: donationProgram.currentDonateAmount,
+                                        endAt: donationProgram.endAt,
+                                      );
+                                    }).toList(),
+                                  );
+                                }
+                                return const Center(
+                                  child: CircularProgressIndicator(),
+                                );
+                              },
+                            ),
                           ),
                         )
                       ],
