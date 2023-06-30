@@ -8,7 +8,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:peduli_yatim_pens_mobile/widgets/bank_item.dart';
 
 class DonationAmountPage extends StatefulWidget {
-  const DonationAmountPage({Key? key});
+  final String title;
+
+  DonationAmountPage({
+    Key? key,
+    required this.title,
+  });
 
   @override
   State<DonationAmountPage> createState() => _DonationAmountPageState();
@@ -88,7 +93,8 @@ class _DonationAmountPageState extends State<DonationAmountPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => MidtransPage(amountDonation: amountController.text),
+                      builder: (context) =>
+                          MidtransPage(amountDonation: amountController.text),
                     ),
                   );
                 },
@@ -99,7 +105,8 @@ class _DonationAmountPageState extends State<DonationAmountPage> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: greenPrimaryColor,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10), // set the desired radius
+                    borderRadius:
+                        BorderRadius.circular(10), // set the desired radius
                   ),
                 ),
               ),
@@ -113,7 +120,8 @@ class _DonationAmountPageState extends State<DonationAmountPage> {
               Container(
                 color: whiteColor,
                 width: MediaQuery.of(context).size.width,
-                padding: const EdgeInsets.only(left: 15, right: 15, top: 30, bottom: 5),
+                padding: const EdgeInsets.only(
+                    left: 15, right: 15, top: 30, bottom: 5),
                 child: Text(
                   'Program Donasi',
                   style: greyTextStyle.copyWith(
@@ -127,14 +135,16 @@ class _DonationAmountPageState extends State<DonationAmountPage> {
                 width: MediaQuery.of(context).size.width,
                 padding: const EdgeInsets.only(left: 15, right: 15, bottom: 20),
                 child: Text(
-                  'Infaq Yatim Dhuafa',
+                  widget.title,
                   style: darkTextStyle.copyWith(
                     fontSize: 18,
                     fontWeight: semiBold,
                   ),
                 ),
               ),
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               Container(
                 color: whiteColor,
                 padding: EdgeInsets.only(left: 15, right: 15, top: 20),
@@ -177,8 +187,7 @@ class _DonationAmountPageState extends State<DonationAmountPage> {
               ),
               Container(
                 color: whiteColor,
-                padding:
-                    EdgeInsets.only(left: 15, right: 15, bottom: 30),
+                padding: EdgeInsets.only(left: 15, right: 15, bottom: 30),
                 width: MediaQuery.of(context).size.width,
                 child: Column(
                   children: [
@@ -187,11 +196,13 @@ class _DonationAmountPageState extends State<DonationAmountPage> {
                       children: [
                         DonationButton(
                           value: '20.000',
-                          onPressed: () => updateDonationValue('20000'.toString()),
+                          onPressed: () =>
+                              updateDonationValue('20000'.toString()),
                         ),
                         DonationButton(
                           value: '50.000',
-                          onPressed: () => updateDonationValue('50000'.toString()),
+                          onPressed: () =>
+                              updateDonationValue('50000'.toString()),
                         ),
                       ],
                     ),
@@ -203,11 +214,13 @@ class _DonationAmountPageState extends State<DonationAmountPage> {
                       children: [
                         DonationButton(
                           value: '100.000',
-                          onPressed: () => updateDonationValue('100000'.toString()),
+                          onPressed: () =>
+                              updateDonationValue('100000'.toString()),
                         ),
                         DonationButton(
                           value: '300.000',
-                          onPressed: () => updateDonationValue('300000'.toString()),
+                          onPressed: () =>
+                              updateDonationValue('300000'.toString()),
                         ),
                       ],
                     )
@@ -217,7 +230,6 @@ class _DonationAmountPageState extends State<DonationAmountPage> {
               const SizedBox(
                 height: 30,
               ),
-             
             ],
           ),
         ),

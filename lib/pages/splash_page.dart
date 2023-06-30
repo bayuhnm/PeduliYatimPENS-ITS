@@ -9,7 +9,7 @@ import 'package:peduli_yatim_pens_mobile/pages/login_page.dart';
 import 'package:peduli_yatim_pens_mobile/pages/main_page.dart';
 
 class SplashPage extends StatefulWidget {
-  const SplashPage({super.key});
+  const SplashPage({Key? key}) : super(key: key);
 
   @override
   State<SplashPage> createState() => _SplashPageState();
@@ -19,12 +19,15 @@ class _SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 3), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => MainPage()),
-      );
-    });
+    navigateToLoginPage();
+  }
+
+  Future<void> navigateToLoginPage() async {
+    // Simulate a delay for the splash screen
+    await Future.delayed(Duration(seconds: 3));
+
+    // Navigate to the login page
+    Navigator.pushReplacementNamed(context, '/login');
   }
 
   @override

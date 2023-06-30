@@ -26,8 +26,8 @@ class _MidtransPageState extends State<MidtransPage> {
   }
 
   Future<void> fetchSnapId(String amountDonation) async {
-    String userId = '7';
-    String programId = '6';
+    String userId = '11';
+    String programId = '8';
     String isAnonim = '1';
 
     try {

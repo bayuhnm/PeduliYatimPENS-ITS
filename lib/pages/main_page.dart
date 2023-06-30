@@ -39,6 +39,10 @@ class MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primaryColor: myColor,
+        primarySwatch: myColor,
+      ),
       home: Scaffold(
         body: _pages[_currentIndex],
         bottomNavigationBar: BottomAppBar(

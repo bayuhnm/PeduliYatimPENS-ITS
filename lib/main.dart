@@ -40,11 +40,11 @@ class MyApp extends StatelessWidget {
           // '/main' :(context) => MainPage(),
           '/login': (context) => const LoginPage(),
           '/register': (context) => RegisterPage(),
-          '/donation-detail': (context) => DetailDonationPage(),
+          // '/donation-detail': (context) => DetailDonationPage(),
           '/profile': (context) => ProfilePage(),
           '/success': (context) => const PaymentSuccessPage(),
           '/donation-list': (context) => DonationListPage(),
-          '/donation-amount': (context) => DonationAmountPage(),
+          // '/donation-amount': (context) => DonationAmountPage(),
         },
       ),
     );

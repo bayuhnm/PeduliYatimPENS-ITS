@@ -114,10 +114,13 @@ class _RegisterSetProfilePageState extends State<RegisterSetProfilePage> {
                 ),
                 ElevatedButton(
                   child: Text('Continue'),
-                  onPressed: () {
-                  context.read<AuthBloc>().add(
-                        AuthRegister(widget.data),
-                      );
+                //   onPressed: () {
+                //   context.read<AuthBloc>().add(
+                //         AuthRegister(widget.data),
+                //       );
+                // },
+                onPressed: () {
+                  
                 },
                 ),
               ],

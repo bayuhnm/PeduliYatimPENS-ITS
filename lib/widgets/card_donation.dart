@@ -10,15 +10,17 @@ class DonationCard extends StatelessWidget {
   String urlImage = 'https://donasi.peduliyatim.or.id/img/asset/donateprogram/';
   final String? currentDonateAmount;
   final String? endAt;
+  final VoidCallback? onTap;
 
   DonationCard({
     Key? key,
     required this.data,
     this.currentDonateAmount,
-    this.endAt
+    this.endAt,
+    this.onTap,
   }) : super(key: key);
 
-String formatCurrency(String currentDonateAmount) {
+  String formatCurrency(String currentDonateAmount) {
     // Hapus semua karakter yang bukan digit
     String digitsOnly = currentDonateAmount.replaceAll(RegExp(r'[^\d]'), '');
 
@@ -33,32 +35,17 @@ String formatCurrency(String currentDonateAmount) {
     return '$formatted';
   }
 
-double calculatePercentage( String currentDonateAmount, String donateGoal) {
-    double currentAmount = double.tryParse(currentDonateAmount) ?? 0;
-    double goal = double.tryParse(donateGoal) ?? 1; // Avoid division by zero
-
-    double percentage = (currentAmount / goal) * 100;
-    percentage *= 2;
-
-    return percentage;
-  }
-
   @override
   Widget build(BuildContext context) {
-
-    final formattedAmount = NumberFormat('#,##0', 'id_ID').format(int.parse(currentDonateAmount!));
+    final formattedAmount =
+        NumberFormat('#,##0', 'id_ID').format(int.parse(currentDonateAmount!));
 
     final endAt = DateTime.parse(data.endAt!);
     final now = DateTime.now();
     final remainingDays = endAt.difference(now).inDays;
 
     return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => DetailDonationPage()),
-        );
-      },
+      onTap: onTap,
       child: Container(
         margin: const EdgeInsets.only(left: 15, bottom: 20),
         height: 210,
@@ -95,6 +82,12 @@ double calculatePercentage( String currentDonateAmount, String donateGoal) {
                 child: Image.network(
                   urlImage + data.photo!,
                   fit: BoxFit.fitWidth,
+                  errorBuilder: (context, exception, stackTrace) {
+                    return Image.asset(
+                      'asset/other/image-not-found.jpg',
+                      fit: BoxFit.fitWidth,
+                    );
+                  },
                 ),
               ),
               Padding(
@@ -118,7 +111,10 @@ double calculatePercentage( String currentDonateAmount, String donateGoal) {
                     const SizedBox(
                       height: 15,
                     ),
-                    PercentageBar(percentage: 40, width: 184),
+                    PercentageBar(
+                        percentage: calculatePercentage(
+                            data.currentDonateAmount!, data.donateGoal!),
+                        width: 184),
                     const SizedBox(
                       height: 10,
                     ),

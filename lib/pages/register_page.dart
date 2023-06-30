@@ -265,16 +265,16 @@ class _RegisterPageState extends State<RegisterPage> {
                             );
                           }
 
-                          if (state is AuthFailed) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text(
-                                  state.e,
-                                ),
-                                backgroundColor: redColor,
-                              ),
-                            );
-                          }
+                          // if (state is LoginErrorState) {
+                          //   ScaffoldMessenger.of(context).showSnackBar(
+                          //     SnackBar(
+                          //       content: Text(
+                          //         state.errorMessage,
+                          //       ),
+                          //       backgroundColor: redColor,
+                          //     ),
+                          //   );
+                          // }
                         },
                         builder: (context, state) {
                           if (state is AuthLoading) {

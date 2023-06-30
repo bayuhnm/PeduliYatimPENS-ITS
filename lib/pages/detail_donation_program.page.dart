@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:peduli_yatim_pens_mobile/global/theme.dart';
+import 'package:peduli_yatim_pens_mobile/models/donation_program_model.dart';
 import 'package:peduli_yatim_pens_mobile/pages/donation_amount_page.dart';
 import 'package:peduli_yatim_pens_mobile/pages/donation_page.dart';
 import 'package:peduli_yatim_pens_mobile/pages/topup_amount_page.dart';
@@ -7,13 +9,67 @@ import 'package:peduli_yatim_pens_mobile/widgets/text_wrapper.dart';
 import '../widgets/percentage_bar.dart';
 
 class DetailDonationPage extends StatelessWidget {
-  const DetailDonationPage({super.key});
+  final DonationProgramModel data;
+  String urlImage = 'https://donasi.peduliyatim.or.id/img/asset/donateprogram/';
+  final String? currentDonateAmount;
+  final String? donateGoal;
+  final String? endAt;
+  final VoidCallback? onTap;
+
+  DetailDonationPage({
+    Key? key,
+    required this.data,
+    this.currentDonateAmount,
+    this.donateGoal,
+    this.endAt,
+    this.onTap,
+  }) : super(key: key);
+
+  String formatCurrency(String currentDonateAmount) {
+    // Hapus semua karakter yang bukan digit
+    String digitsOnly = currentDonateAmount.replaceAll(RegExp(r'[^\d]'), '');
+
+    // Parsing sebagai integer
+    int value = int.tryParse(digitsOnly) ?? 0;
+
+    // Format nominal dengan titik sebagai digit
+    String formatted = value.toString().replaceAllMapped(
+        RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]}.');
+
+    // Tambahkan "Rp." di depan nominal
+    return '$formatted';
+  }
+
+  String formatCurrencyGoal(String donateGoal) {
+    // Hapus semua karakter yang bukan digit
+    String digitsOnly = donateGoal.replaceAll(RegExp(r'[^\d]'), '');
+
+    // Parsing sebagai integer
+    int value = int.tryParse(digitsOnly) ?? 0;
+
+    // Format nominal dengan titik sebagai digit
+    String formattedGoal = value.toString().replaceAllMapped(
+        RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'), (Match m) => '${m[1]}.');
+
+    // Tambahkan "Rp." di depan nominal
+    return '$formattedGoal';
+  }
 
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
     bool _showNavigationBar = false;
+
+    final formattedAmount =
+        NumberFormat('#,##0', 'id_ID').format(int.parse(currentDonateAmount!));
+
+    final formattedGoal =
+        NumberFormat('#,##0', 'id_ID').format(int.parse(donateGoal!));
+
+    final endAt = DateTime.parse(data.endAt!);
+    final now = DateTime.now();
+    final remainingDays = endAt.difference(now).inDays;
 
     return MaterialApp(
       theme: ThemeData(
@@ -29,7 +85,10 @@ class DetailDonationPage extends StatelessWidget {
           backgroundColor: Colors.transparent,
           leading: IconButton(
             color: darkColor,
-            icon: Icon(Icons.arrow_back, color: darkColor,),
+            icon: Icon(
+              Icons.arrow_back,
+              color: darkColor,
+            ),
             onPressed: () {
               Navigator.pop(context);
             },
@@ -56,7 +115,7 @@ class DetailDonationPage extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => DonationAmountPage(),
+                      builder: (context) => DonationAmountPage(title: data.name!,),
                     ),
                   );
                 },
@@ -81,14 +140,21 @@ class DetailDonationPage extends StatelessWidget {
               delegate: SliverChildListDelegate(
                 [
                   Container(
-                    margin: EdgeInsets.only(left: 15, right:15, top: 5, bottom: 10),
+                    margin: EdgeInsets.only(
+                        left: 15, right: 15, top: 5, bottom: 10),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(5),
                       child: AspectRatio(
                         aspectRatio: 16 / 9,
-                        child: Image.asset(
-                          'asset/image/imageA2.jpg',
+                        child: Image.network(
+                          urlImage + data.photo!,
                           fit: BoxFit.fitWidth,
+                          errorBuilder: (context, exception, stackTrace) {
+                            return Image.asset(
+                              'asset/other/image-not-found.jpg',
+                              fit: BoxFit.fitWidth,
+                            );
+                          },
                         ),
                       ),
                     ),
@@ -102,7 +168,7 @@ class DetailDonationPage extends StatelessWidget {
                       children: [
                         SizedBox(height: 15),
                         Text(
-                          'Bantu Pembangunan Masjid Jami Al-Mukminin',
+                          data.name!,
                           style: darkTextStyle.copyWith(
                             height: 1.2,
                             fontSize: 18,
@@ -138,14 +204,16 @@ class DetailDonationPage extends StatelessWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Container(
-                                    width: screenWidth - 90,
+                                    width: screenWidth - 100,
                                     child: PercentageBar(
-                                      percentage: 30,
+                                      percentage: calculatePercentage(
+                                          data.currentDonateAmount!,
+                                          data.donateGoal!),
                                       width: screenWidth - 90,
                                     ),
                                   ),
                                   Text(
-                                    '39%',
+                                    '${calculatePercentage(data.currentDonateAmount!, data.donateGoal!)} %',
                                     style: greenTextStyle.copyWith(
                                         fontSize: 14, fontWeight: bold),
                                   ),
@@ -164,7 +232,7 @@ class DetailDonationPage extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
                                   Text(
-                                    'Rp. 67.000.000',
+                                    'Rp. $formattedAmount',
                                     style: greenTextStyle.copyWith(
                                       fontSize: 18,
                                       fontWeight: bold,
@@ -178,7 +246,7 @@ class DetailDonationPage extends StatelessWidget {
                                     ),
                                   ),
                                   Text(
-                                    '400.000.000',
+                                    formattedGoal,
                                     style: greyTextStyle.copyWith(
                                       fontSize: 14,
                                       fontWeight: medium,
@@ -195,7 +263,7 @@ class DetailDonationPage extends StatelessWidget {
                                     fontSize: 12, fontWeight: medium),
                               ),
                               Text(
-                                '39 Hari Lagi',
+                                '$remainingDays Hari Lagi',
                                 style: darkTextStyle.copyWith(
                                   fontSize: 14,
                                   fontWeight: semiBold,
@@ -213,10 +281,8 @@ class DetailDonationPage extends StatelessWidget {
                           ),
                           child: SingleChildScrollView(
                             child: Column(
-                              children: const [
-                                TextWrapper(
-                                    text:
-                                        "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Can sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet. Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi. Nam eget dui."),
+                              children: [
+                                TextWrapper(text: data.description!),
                               ],
                             ),
                           ),

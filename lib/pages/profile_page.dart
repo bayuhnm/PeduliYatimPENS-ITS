@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:peduli_yatim_pens_mobile/global/theme.dart';
+import 'package:peduli_yatim_pens_mobile/pages/login_page.dart';
 import 'package:peduli_yatim_pens_mobile/widgets/profile_item.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -99,7 +100,14 @@ class ProfilePageState extends State<ProfilePage> {
                     height: 30,
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => LoginPage(),
+                              ),
+                            );
+                    },
                     child: Container(
                       padding: EdgeInsets.all(15),
                       decoration: BoxDecoration(color: whiteColor, borderRadius: BorderRadius.circular(7)),
