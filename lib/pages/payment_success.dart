@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:peduli_yatim_pens_mobile/global/theme.dart';
 import 'package:peduli_yatim_pens_mobile/pages/home_page.dart';
-import 'package:peduli_yatim_pens_mobile/pages/main_page%20copy.dart';
+import 'package:peduli_yatim_pens_mobile/pages/main_page.dart';
 
 class PaymentSuccessPage extends StatelessWidget {
   const PaymentSuccessPage({Key? key}) : super(key: key);
@@ -33,7 +33,6 @@ class PaymentSuccessPage extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
-            
             const SizedBox(
               height: 50,
             ),

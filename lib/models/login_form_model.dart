@@ -1,11 +1,8 @@
 class LoginFormModel {
-  final String? email;
-  final String? password;
+  final String email;
+  final String password;
 
-  LoginFormModel({
-    this.email,
-    this.password,
-  });
+  LoginFormModel({required this.email, required this.password});
 
   Map<String, dynamic> toJson() {
     return {
@@ -13,13 +10,4 @@ class LoginFormModel {
       'password': password,
     };
   }
-
-  LoginFormModel copyWith({
-    String? email,
-    String? password,
-  }) =>
-      LoginFormModel(
-        email: email ?? this.email,
-        password: password ?? this.password,
-      );
 }

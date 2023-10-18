@@ -75,7 +75,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
               child: Container(color: Colors.white.withOpacity(0.0)),
             ),
           ),
-          Text('Riwayat Donasi'),
+          Text('Laporan Keuangan Yayasan'),
           SizedBox(
             height: 15,
           ),

@@ -8,10 +8,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:peduli_yatim_pens_mobile/widgets/bank_item.dart';
 
 class DonationAmountPage extends StatefulWidget {
+  final String id;
   final String title;
 
   DonationAmountPage({
     Key? key,
+    required this.id,
     required this.title,
   });
 
@@ -93,8 +95,9 @@ class _DonationAmountPageState extends State<DonationAmountPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          MidtransPage(amountDonation: amountController.text),
+                      builder: (context) => MidtransPage(
+                          amountDonation: amountController.text,
+                          programId: widget.id),
                     ),
                   );
                 },

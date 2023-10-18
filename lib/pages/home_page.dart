@@ -4,10 +4,7 @@ import 'package:peduli_yatim_pens_mobile/bloc/donation_program/donation_program_
 import 'package:peduli_yatim_pens_mobile/global/theme.dart';
 import 'package:peduli_yatim_pens_mobile/pages/detail_donation_program.page.dart';
 import 'package:peduli_yatim_pens_mobile/pages/donation_amount_page.dart';
-import 'package:peduli_yatim_pens_mobile/pages/login_page.dart';
 import 'package:peduli_yatim_pens_mobile/pages/money_report_page.dart';
-import 'package:peduli_yatim_pens_mobile/pages/register_page.dart';
-import 'package:peduli_yatim_pens_mobile/pages/splash_page.dart';
 import 'package:peduli_yatim_pens_mobile/widgets/card_activity_report.dart';
 import 'package:peduli_yatim_pens_mobile/widgets/card_article.dart';
 import 'package:peduli_yatim_pens_mobile/widgets/card_donation.dart';
@@ -114,7 +111,7 @@ class _HomePageState extends State<HomePage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => DonationAmountPage(title: 'Infaq Yatim Duafa'),
+                                builder: (context) => DonationAmountPage(title: 'Infaq Yatim Duafa', id: '1',),
                               ),
                             );
                           },
@@ -126,7 +123,7 @@ class _HomePageState extends State<HomePage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => DonationAmountPage(title: 'Zakat'),
+                                builder: (context) => DonationAmountPage(title: 'Zakat',id: '2'),
                               ),
                             );
                           },
@@ -215,8 +212,7 @@ class _HomePageState extends State<HomePage> {
                                       temporaryPrograms.map((donationProgram) {
                                     return DonationCard(
                                       data: donationProgram,
-                                      currentDonateAmount:
-                                          donationProgram.currentDonateAmount,
+                                      currentDonateAmount: donationProgram.currentDonateAmount,
                                       endAt: donationProgram.endAt,
                                       onTap: () {
                                         Navigator.push(
@@ -225,11 +221,8 @@ class _HomePageState extends State<HomePage> {
                                             builder: (context) =>
                                                 DetailDonationPage(
                                               data: donationProgram,
-                                              currentDonateAmount:
-                                                  donationProgram
-                                                      .currentDonateAmount,
-                                              donateGoal:
-                                                  donationProgram.donateGoal,
+                                              currentDonateAmount: donationProgram.currentDonateAmount,
+                                              donateGoal: donationProgram.donateGoal,
                                               endAt: donationProgram.endAt,
                                             ),
                                           ),
@@ -382,8 +375,8 @@ class _HomePageState extends State<HomePage> {
                         child: Row(
                           children: [
                             ArticleCard(),
-                            ArticleCard(),
-                            ArticleCard(),
+                            // ArticleCard(),
+                            // ArticleCard(),
                           ],
                         ),
                       ),

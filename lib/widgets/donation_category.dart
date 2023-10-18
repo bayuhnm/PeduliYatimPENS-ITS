@@ -86,7 +86,7 @@ class MoreDialog extends StatelessWidget {
                     onTap: () {Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => DonationAmountPage(title: 'Infaq Swakelola'),
+                                  builder: (context) => DonationAmountPage(title: 'Infaq Swakelola',id: '3'),
                                 ),
                               );},
                   ),
@@ -96,7 +96,7 @@ class MoreDialog extends StatelessWidget {
                     onTap: () {Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => DonationAmountPage(title: 'Waqaf Tanah'),
+                                  builder: (context) => DonationAmountPage(title: 'Waqaf Tanah', id: '4'),
                                 ),
                               );},
                   ),
@@ -106,7 +106,7 @@ class MoreDialog extends StatelessWidget {
                     onTap: () {Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => DonationAmountPage(title: 'Modal'),
+                                  builder: (context) => DonationAmountPage(title: 'Modal', id: '5'),
                                 ),
                               );},
                   ),

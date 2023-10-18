@@ -8,8 +8,13 @@ import 'package:http/http.dart' as http;
 
 class MidtransPage extends StatefulWidget {
   final String amountDonation;
+  final String programId;
 
-  const MidtransPage({Key? key, required this.amountDonation}) : super(key: key);
+  const MidtransPage({
+    Key? key,
+    required this.amountDonation,
+    required this.programId
+  }) : super(key: key);
 
   @override
   State<MidtransPage> createState() => _MidtransPageState();
@@ -22,12 +27,12 @@ class _MidtransPageState extends State<MidtransPage> {
   @override
   void initState() {
     super.initState();
-    fetchSnapId(widget.amountDonation);
+    fetchSnapId(widget.amountDonation, widget.programId);
   }
 
-  Future<void> fetchSnapId(String amountDonation) async {
+  Future<void> fetchSnapId(String amountDonation, String programId) async {
     String userId = '11';
-    String programId = '8';
+    // String programId = '8';
     String isAnonim = '1';
 
     try {

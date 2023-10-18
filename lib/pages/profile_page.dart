@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:peduli_yatim_pens_mobile/pages/account_page.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:peduli_yatim_pens_mobile/bloc/auth/auth_bloc.dart';
 import 'package:peduli_yatim_pens_mobile/global/theme.dart';
 import 'package:peduli_yatim_pens_mobile/pages/login_page.dart';
 import 'package:peduli_yatim_pens_mobile/widgets/profile_item.dart';
+
 
 class ProfilePage extends StatefulWidget {
   ProfilePage({super.key});
@@ -10,9 +15,12 @@ class ProfilePage extends StatefulWidget {
   State<ProfilePage> createState() => ProfilePageState();
 }
 
+
 class ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
+    final AuthBloc authBloc = BlocProvider.of<AuthBloc>(context);
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
@@ -36,7 +44,7 @@ class ProfilePageState extends State<ProfilePage> {
                 height: 12,
               ),
               Text(
-                'Riwayat Donasi',
+                'Profile Akun',
                 style: darkTextStyle,
               ),
             ],
@@ -89,7 +97,12 @@ class ProfilePageState extends State<ProfilePage> {
                   ProfileMenuItem(
                     iconUrl: 'asset/icon/InformasiAkun.png',
                     title: 'Informasi Akun',
-                    onTap: () {},
+                    onTap: () { Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => RegisterPilihHari(),
+                              ),
+                            );},
                   ),
                   ProfileMenuItem(
                     iconUrl: 'asset/icon/PusatBantuan.png',
@@ -101,16 +114,16 @@ class ProfilePageState extends State<ProfilePage> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => LoginPage(),
-                              ),
-                            );
+                      authBloc.add(LoggedOut());
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                      );
                     },
                     child: Container(
                       padding: EdgeInsets.all(15),
-                      decoration: BoxDecoration(color: whiteColor, borderRadius: BorderRadius.circular(7)),
+                      decoration: BoxDecoration(
+                          color: whiteColor,
+                          borderRadius: BorderRadius.circular(7)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
